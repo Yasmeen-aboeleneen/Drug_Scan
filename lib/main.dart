@@ -1,3 +1,4 @@
+import 'package:drug_scan_app/Views/Auth/login_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -7,17 +8,16 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-   @override
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Drug Scan',
       theme: ThemeData(
-         
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-     );
+      home: LoginScreen(),
+    );
   }
 }
-
- 
