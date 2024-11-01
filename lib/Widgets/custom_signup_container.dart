@@ -24,6 +24,8 @@ class CustomSignupContainer extends StatelessWidget {
             scrollDirection: Axis.vertical,
             children: [
               const CustomTextField(
+                hintcolor: kBlack,
+                filledcolor: kveryWhite,
                 icon: Icons.person,
                 hintText: 'Enter your username',
                 iconColor: kPrimary,
@@ -31,6 +33,8 @@ class CustomSignupContainer extends StatelessWidget {
               ),
               SizedBox(height: h * .05),
               const CustomTextField(
+                hintcolor: kBlack,
+                filledcolor: kveryWhite,
                 icon: Icons.mail_outline_outlined,
                 hintText: 'Enter your email',
                 iconColor: kPrimary,
@@ -38,6 +42,8 @@ class CustomSignupContainer extends StatelessWidget {
               ),
               SizedBox(height: h * .05),
               const CustomTextField(
+                hintcolor: kBlack,
+                filledcolor: kveryWhite,
                 icon: Icons.phone,
                 hintText: 'Enter your phone',
                 iconColor: kPrimary,
@@ -45,18 +51,15 @@ class CustomSignupContainer extends StatelessWidget {
               ),
               SizedBox(height: h * .05),
               const CustomTextField(
+                hintcolor: kBlack,
+                filledcolor: kveryWhite,
                 icon: Icons.lock_outline,
                 hintText: 'Enter your password',
                 iconColor: kPrimary,
                 keyboardType: TextInputType.text,
               ),
-              SizedBox(height: h * .02),
               SizedBox(
                 height: h * .06,
-              ),
-              const CustomButton(text: 'Sign up'),
-              SizedBox(
-                height: h * .03,
               ),
               Padding(
                 padding: const EdgeInsets.only(right: 20, left: 20),
@@ -80,6 +83,13 @@ class CustomSignupContainer extends StatelessWidget {
                     ),
                   ),
                 ),
+              ),
+              SizedBox(
+                height: h * .03,
+              ),
+              const CustomButton(text: 'Sign up'),
+              SizedBox(
+                height: h * .03,
               ),
             ],
           ),

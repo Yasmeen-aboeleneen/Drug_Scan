@@ -1,20 +1,23 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 
 import 'package:drug_scan_app/Core/Constants/colors.dart';
 
 class CustomTextField extends StatelessWidget {
   const CustomTextField({
-    Key? key,
-    required Color iconColor,
+    super.key,
     required this.hintText,
     required this.keyboardType,
     required this.icon,
-  }) : super(key: key);
+    required this.filledcolor,
+    required this.hintcolor, required Color iconColor,
+  });
+
   final String hintText;
   final TextInputType keyboardType;
-  // final TextEditingController textEditingController;
   final IconData icon;
+  final Color filledcolor;
+  final Color hintcolor;
+
   @override
   Widget build(BuildContext context) {
     var w = MediaQuery.of(context).size.width;
@@ -22,10 +25,9 @@ class CustomTextField extends StatelessWidget {
       padding: const EdgeInsets.only(left: 15, right: 15),
       child: TextFormField(
         keyboardType: keyboardType,
-        // controller: textEditingController,
         textCapitalization: TextCapitalization.words,
         decoration: InputDecoration(
-          fillColor: kveryWhite,
+          fillColor: filledcolor,
           filled: true,
           suffixIcon: Icon(
             icon,
@@ -41,9 +43,11 @@ class CustomTextField extends StatelessWidget {
           hintStyle: TextStyle(
             fontSize: w * .032,
             fontWeight: FontWeight.bold,
+            color: hintcolor, // Set the hint text color here
           ),
         ),
       ),
     );
   }
 }
+

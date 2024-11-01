@@ -12,26 +12,28 @@ class LoginScreen extends StatelessWidget {
     var w = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: kveryWhite,
-      body: Column(
-        children: [
-          SizedBox(height: h * .056),
-          Row(
-            children: [
-              Image.asset(
-                'Assets/pic.png',
-                width: w * .4,
-              ),
-              Text(
-                "Login To Drug Scan",
-                style: GoogleFonts.notoSans(
-                    color: kPrimary,
-                    fontSize: w * .05,
-                    fontWeight: FontWeight.bold),
-              ),
-            ],
-          ),
-          const CustomLoginContainer()
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            SizedBox(height: h * .056),
+            Row(
+              children: [
+                Image.asset(
+                  'Assets/pic.png',
+                  width: w * .4,
+                ),
+                Text(
+                  "Login To Drug Scan",
+                  style: GoogleFonts.notoSans(
+                      color: kPrimary,
+                      fontSize: w * .05,
+                      fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+            const CustomLoginContainer()
+          ],
+        ),
       ),
     );
   }

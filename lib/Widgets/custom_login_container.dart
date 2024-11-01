@@ -26,13 +26,16 @@ class CustomLoginContainer extends StatelessWidget {
             children: [
               SizedBox(height: h * .05),
               const CustomTextField(
+                filledcolor: kveryWhite,
                 icon: Icons.mail_outline_outlined,
                 hintText: 'Enter your email',
                 iconColor: kPrimary,
-                keyboardType: TextInputType.emailAddress,
+                keyboardType: TextInputType.emailAddress, hintcolor: kBlack,
               ),
               SizedBox(height: h * .05),
               const CustomTextField(
+                hintcolor: kBlack,
+                filledcolor: kveryWhite,
                 icon: Icons.lock_outline,
                 hintText: 'Enter your password',
                 iconColor: kPrimary,
