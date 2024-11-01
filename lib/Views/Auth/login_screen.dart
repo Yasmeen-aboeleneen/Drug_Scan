@@ -12,12 +12,9 @@ class LoginScreen extends StatelessWidget {
     var w = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: kveryWhite,
-      body: SingleChildScrollView(
-          child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
+      body: Column(
         children: [
-          SizedBox(height: h * .044),
+          SizedBox(height: h * .056),
           Row(
             children: [
               Image.asset(
@@ -35,7 +32,7 @@ class LoginScreen extends StatelessWidget {
           ),
           const CustomLoginContainer()
         ],
-      )),
+      ),
     );
   }
 }
