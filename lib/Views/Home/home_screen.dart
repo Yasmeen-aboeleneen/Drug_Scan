@@ -20,7 +20,7 @@ class HomeScreen extends StatelessWidget {
               height: h * .03,
             ),
             Align(
-              alignment: Alignment.topRight,
+              alignment: Alignment.topLeft,
               child: IconButton(
                   style: const ButtonStyle(
                       backgroundColor: WidgetStatePropertyAll(kPrimary)),
