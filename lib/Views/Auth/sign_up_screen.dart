@@ -15,7 +15,7 @@ class SignUpScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(height: h * .056),
+            SizedBox(height: h * .045),
             Row(
               children: [
                 Image.asset(
@@ -31,7 +31,10 @@ class SignUpScreen extends StatelessWidget {
                 ),
               ],
             ),
-            const CustomSignupContainer()
+            const CustomSignupContainer(),
+            SizedBox(
+              height: h * .03,
+            )
           ],
         ),
       ),

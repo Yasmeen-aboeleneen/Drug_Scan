@@ -14,24 +14,21 @@ class CustomButton extends StatelessWidget {
   Widget build(BuildContext context) {
     var h = MediaQuery.of(context).size.height;
     var w = MediaQuery.of(context).size.width;
-    return Padding(
-      padding: const EdgeInsets.only(left: 70, right: 70),
-      child: Container(
-        margin:const EdgeInsets.only(right: 20, left: 20),
-        height: h * .053,
-        width: w * .3,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15),
-            gradient: const LinearGradient(
-                colors: [kPrimary2, kPrimary2, kPrimary3, kPrimary3])),
-        child: Center(
-          child: Text(
-            text,
-            style: GoogleFonts.aBeeZee(
-                color: kveryWhite,
-                fontSize: w * .05,
-                fontWeight: FontWeight.bold),
-          ),
+    return Container(
+      margin: const EdgeInsets.only(right: 15, left: 15),
+      height: h * .053,
+      width: w * .38,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15),
+          gradient: const LinearGradient(
+              colors: [kPrimary2, kPrimary2, kPrimary3, kPrimary3])),
+      child: Center(
+        child: Text(
+          text,
+          style: GoogleFonts.aBeeZee(
+              color: kveryWhite,
+              fontSize: w * .055,
+              fontWeight: FontWeight.bold),
         ),
       ),
     );
