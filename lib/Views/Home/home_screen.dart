@@ -3,10 +3,15 @@ import 'package:drug_scan_app/Views/Profile/profile_screen.dart';
 import 'package:drug_scan_app/Widgets/custom_capture_button.dart';
 import 'package:drug_scan_app/Widgets/image_container.dart';
 import 'package:flutter/material.dart';
-
-class HomeScreen extends StatelessWidget {
+ 
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     var h = MediaQuery.of(context).size.height;
@@ -70,4 +75,12 @@ class HomeScreen extends StatelessWidget {
       ),
     );
   }
+
+  // void pickImage() async {
+  //   var image = await ImagePicker.platform
+  //       .getImageFromSource(source: ImageSource.camera);
+  //   setState(() {
+       
+  //   });
+  // }
 }
