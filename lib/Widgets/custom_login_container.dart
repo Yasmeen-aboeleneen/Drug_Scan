@@ -1,9 +1,12 @@
 import 'package:drug_scan_app/Core/Constants/colors.dart';
 import 'package:drug_scan_app/Views/Auth/forgot_password_screen.dart';
 import 'package:drug_scan_app/Views/Auth/sign_up_screen.dart';
+import 'package:drug_scan_app/Views/Home/home_screen.dart';
 import 'package:drug_scan_app/Widgets/custom_button.dart';
 import 'package:drug_scan_app/Widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CustomLoginContainer extends StatelessWidget {
@@ -30,7 +33,8 @@ class CustomLoginContainer extends StatelessWidget {
                 icon: Icons.mail_outline_outlined,
                 hintText: 'Enter your email',
                 iconColor: kPrimary,
-                keyboardType: TextInputType.emailAddress, hintcolor: kBlack,
+                keyboardType: TextInputType.emailAddress,
+                hintcolor: kBlack,
               ),
               SizedBox(height: h * .05),
               const CustomTextField(
@@ -69,7 +73,13 @@ class CustomLoginContainer extends StatelessWidget {
               SizedBox(
                 height: h * .06,
               ),
-              const CustomButton(text: 'Login'),
+              GestureDetector(
+                  onTap: () {
+                    Get.to(const HomeScreen());
+                  },
+                  child: const CustomButton(
+                    text: 'Login',
+                  )),
               SizedBox(
                 height: h * .03,
               ),
