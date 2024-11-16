@@ -8,6 +8,7 @@
         android:label="drug_scan_app"
         android:name="${applicationName}"
         android:usesCleartextTraffic="true"
+        android:enableOnBackInvokedCallback="true"
         android:icon="@mipmap/ic_launcher">
         
          <activity

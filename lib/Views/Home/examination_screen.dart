@@ -1,10 +1,119 @@
-import 'package:flutter/material.dart';
+import 'dart:io';
 
-class ExaminationScreen extends StatelessWidget {
-  const ExaminationScreen({super.key});
+import 'package:drug_scan_app/Views/Home/result_screen_negative.dart';
+import 'package:drug_scan_app/Views/Home/result_screen_positive.dart';
+import 'package:drug_scan_app/Widgets/scan_button.dart';
+import 'package:flutter/material.dart';
+import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
+import 'package:drug_scan_app/Core/Constants/colors.dart';
+import 'package:get/get.dart';
+
+class ExaminationScreen extends StatefulWidget {
+  const ExaminationScreen({super.key, required this.imageFile});
+  final File imageFile;
+
+  @override
+  // ignore: library_private_types_in_public_api
+  _ExaminationScreenState createState() => _ExaminationScreenState();
+}
+
+class _ExaminationScreenState extends State<ExaminationScreen> {
+  String _scanResult = "Processing...";
+  bool _isScanning = false;
+
+  Future<void> _scanImage() async {
+    final textRecognizer = TextRecognizer();
+    try {
+      final inputImage = InputImage.fromFile(widget.imageFile);
+      final recognizedText = await textRecognizer.processImage(inputImage);
+
+      setState(() {
+        _scanResult = recognizedText.text.isNotEmpty
+            ? recognizedText.text
+            : "No text found in the image.";
+        _isScanning = false;
+      });
+
+      if (_scanResult.toLowerCase().contains("cannabinoids") ||
+          _scanResult.toLowerCase().contains("Opiate") ||
+          _scanResult.toLowerCase().contains("tramadol") ||
+          _scanResult.toLowerCase().contains("Heroin") ||
+          _scanResult.toLowerCase().contains("positive") ||
+          _scanResult.toLowerCase().contains("morphine")) {
+        Get.to(() => const ResultScreenIsPositive(result: "Positive"));
+      } else {
+        Get.to(() => const ResultScreenIsNegative(result: "Negative"));
+      }
+    } catch (e) {
+      setState(() {
+        _scanResult = "Error occurred while scanning: $e";
+        _isScanning = false;
+      });
+    } finally {
+      textRecognizer.close();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold();
+    var h = MediaQuery.of(context).size.height;
+    var w = MediaQuery.of(context).size.width;
+
+    return Scaffold(
+      backgroundColor: kPrimary,
+      body: Column(
+        children: [
+          SizedBox(height: h * .1),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: w * .05),
+            child: Container(
+              height: h * .45,
+              width: w,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: FileImage(widget.imageFile),
+                  fit: BoxFit.cover,
+                ),
+                border: Border.all(width: w * .02, color: kveryWhite),
+                color: kveryWhite,
+                borderRadius: const BorderRadius.all(Radius.circular(12)),
+              ),
+            ),
+          ),
+          SizedBox(height: h * .09),
+          _isScanning
+              ? const CircularProgressIndicator(color: kveryWhite)
+              : Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.all(w * .05),
+                    child: SingleChildScrollView(
+                      child: Text(
+                        _scanResult,
+                        style: TextStyle(
+                          color: kveryWhite,
+                          fontSize: w * .05,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+          GestureDetector(
+            onTap: () {
+              setState(() {
+                _isScanning = true;
+              });
+              _scanImage();
+            },
+            child: const ScanButton(
+              text: "Start Scanning",
+            ),
+          ),
+          SizedBox(
+            height: h * .15,
+          )
+        ],
+      ),
+    );
   }
 }

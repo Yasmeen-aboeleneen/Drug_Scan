@@ -1,9 +1,13 @@
+import 'dart:io';
+
 import 'package:drug_scan_app/Core/Constants/colors.dart';
+import 'package:drug_scan_app/Views/Home/examination_screen.dart';
 import 'package:drug_scan_app/Views/Profile/profile_screen.dart';
 import 'package:drug_scan_app/Widgets/custom_capture_button.dart';
 import 'package:drug_scan_app/Widgets/image_container.dart';
 import 'package:flutter/material.dart';
- 
+import 'package:image_picker/image_picker.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -12,6 +16,24 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  File? _imageFile;
+  final ImagePicker _picker = ImagePicker();
+  Future<void> _pickImage(ImageSource source) async {
+    final pickedFile = await _picker.pickImage(source: source);
+    if (pickedFile != null) {
+      setState(() {
+        _imageFile = File(pickedFile.path);
+      });
+      // التنقل إلى صفحة عرض الصورة
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ExaminationScreen(imageFile: _imageFile!),
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     var h = MediaQuery.of(context).size.height;
@@ -55,7 +77,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Padding(
                   padding: EdgeInsets.only(left: w * .01),
                   child: GestureDetector(
-                    onTap: () {},
+                    onTap: () => _pickImage(ImageSource.camera),
                     child: const CustomCaptureButton(
                         text: 'Capture image', icon: Icons.camera_alt),
                   ),
@@ -63,7 +85,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Padding(
                   padding: EdgeInsets.only(right: w * .01),
                   child: GestureDetector(
-                    onTap: () {},
+                    onTap: () => _pickImage(ImageSource.gallery),
                     child: const CustomCaptureButton(
                         text: 'From gallery', icon: Icons.photo),
                   ),
@@ -75,12 +97,4 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
-
-  // void pickImage() async {
-  //   var image = await ImagePicker.platform
-  //       .getImageFromSource(source: ImageSource.camera);
-  //   setState(() {
-       
-  //   });
-  // }
 }

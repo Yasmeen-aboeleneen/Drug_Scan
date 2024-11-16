@@ -75,7 +75,7 @@ class CustomLoginContainer extends StatelessWidget {
           ),
           GestureDetector(
               onTap: () {
-                Get.to(const HomeScreen());
+               Get.to(() =>const HomeScreen());
               },
               child: const CustomButton(
                 text: 'Login',

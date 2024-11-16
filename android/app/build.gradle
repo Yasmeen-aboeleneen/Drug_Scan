@@ -3,14 +3,24 @@ plugins {
     id "kotlin-android"
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id "dev.flutter.flutter-gradle-plugin"
+    id "com.google.gms.google-services" // Google services plugin
 }
 
-apply plugin: 'com.google.gms.google-services'  // Apply Google services plugin
-
 android {
-    namespace = "com.example.drug_scan_app"
-    compileSdk = flutter.compileSdkVersion
+    namespace = "com.example.drug_scan_app" // Ensure this matches your package name
+    compileSdk = 34 // Ensure compatibility with targetSdk
     ndkVersion = flutter.ndkVersion
+
+    defaultConfig {
+        applicationId = "com.example.drug_scan_app" // Match your namespace
+        minSdkVersion 23  
+        targetSdk = 34
+        versionCode = flutter.versionCode
+        versionName = flutter.versionName
+
+        // Enable MultiDex for handling large dependencies
+        multiDexEnabled true
+    }
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -18,29 +28,22 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8
-    }
-
-    defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "com.example.drug_scan_app"
-        // You can update the following values to match your application needs.
-        // For more information, see: https://flutter.dev/to/review-gradle-config.
-        minSdk = 23
-        targetSdk = flutter.targetSdkVersion
-        versionCode = flutter.versionCode
-        versionName = flutter.versionName
+        jvmTarget = "1.8"
     }
 
     buildTypes {
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig = signingConfigs.debug
+            // Add signing config here for production builds if needed
+            signingConfig signingConfigs.debug
         }
     }
 }
 
 flutter {
     source = "../.."
+}
+
+dependencies {
+    implementation 'androidx.multidex:multidex:2.0.1' // Ensure MultiDex support
+    // Add other dependencies here if required
 }
