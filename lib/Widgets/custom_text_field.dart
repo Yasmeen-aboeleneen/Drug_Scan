@@ -25,6 +25,7 @@ class CustomTextField extends StatelessWidget {
       padding: const EdgeInsets.only(left: 15, right: 15),
       child: TextFormField(
         keyboardType: keyboardType,
+        cursorColor: kPrimary,
         textCapitalization: TextCapitalization.words,
         decoration: InputDecoration(
           fillColor: filledcolor,
@@ -43,7 +44,7 @@ class CustomTextField extends StatelessWidget {
           hintStyle: TextStyle(
             fontSize: w * .032,
             fontWeight: FontWeight.bold,
-            color: hintcolor, // Set the hint text color here
+            color: hintcolor,  
           ),
         ),
       ),

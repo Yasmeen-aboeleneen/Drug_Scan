@@ -1,4 +1,4 @@
-import 'package:drug_scan_app/Views/Auth/login_screen.dart';
+import 'package:drug_scan_app/Views/Splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
     return const GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Drug Scan',
-      home:   LoginScreen(),
+      home: SplashScreen(),
     );
   }
 }

@@ -3,6 +3,7 @@ import 'package:drug_scan_app/Views/Auth/forgot_password_screen.dart';
 import 'package:drug_scan_app/Views/Auth/sign_up_screen.dart';
 import 'package:drug_scan_app/Views/Home/home_screen.dart';
 import 'package:drug_scan_app/Widgets/custom_button.dart';
+import 'package:drug_scan_app/Widgets/custom_password_field.dart';
 import 'package:drug_scan_app/Widgets/custom_social_button.dart';
 import 'package:drug_scan_app/Widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
@@ -39,14 +40,7 @@ class CustomLoginContainer extends StatelessWidget {
             hintcolor: kBlack,
           ),
           SizedBox(height: h * .05),
-          const CustomTextField(
-            hintcolor: kBlack,
-            filledcolor: kveryWhite,
-            icon: Icons.lock_outline,
-            hintText: 'Enter your password',
-            iconColor: kPrimary,
-            keyboardType: TextInputType.text,
-          ),
+          const CustomPasswordtextfield(),
           SizedBox(height: h * .02),
           Padding(
             padding: const EdgeInsets.only(right: 20),

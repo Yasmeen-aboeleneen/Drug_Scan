@@ -1,6 +1,7 @@
 import 'package:drug_scan_app/Core/Constants/colors.dart';
 import 'package:drug_scan_app/Views/Auth/login_screen.dart';
 import 'package:drug_scan_app/Widgets/custom_button.dart';
+import 'package:drug_scan_app/Widgets/custom_password_field.dart';
 import 'package:drug_scan_app/Widgets/custom_social_button.dart';
 import 'package:drug_scan_app/Widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
@@ -51,14 +52,7 @@ class CustomSignupContainer extends StatelessWidget {
                 keyboardType: TextInputType.number,
               ),
               SizedBox(height: h * .04),
-              const CustomTextField(
-                hintcolor: kBlack,
-                filledcolor: kveryWhite,
-                icon: Icons.lock_outline,
-                hintText: 'Enter your password',
-                iconColor: kPrimary,
-                keyboardType: TextInputType.text,
-              ),
+              const CustomPasswordtextfield(),
               SizedBox(
                 height: h * .03,
               ),
