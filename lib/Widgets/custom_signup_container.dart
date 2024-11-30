@@ -1,14 +1,34 @@
 import 'package:drug_scan_app/Core/Constants/colors.dart';
+import 'package:drug_scan_app/Views/Auth/auth.dart';
 import 'package:drug_scan_app/Views/Auth/login_screen.dart';
 import 'package:drug_scan_app/Widgets/custom_button.dart';
 import 'package:drug_scan_app/Widgets/custom_password_field.dart';
 import 'package:drug_scan_app/Widgets/custom_social_button.dart';
 import 'package:drug_scan_app/Widgets/custom_text_field.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class CustomSignupContainer extends StatelessWidget {
+class CustomSignupContainer extends StatefulWidget {
   const CustomSignupContainer({super.key});
+
+  @override
+  State<CustomSignupContainer> createState() => _CustomSignupContainerState();
+}
+
+class _CustomSignupContainerState extends State<CustomSignupContainer> {
+  final username = TextEditingController();
+  final emailController = TextEditingController();
+  final phoneNumber = TextEditingController();
+  final passwordController = TextEditingController();
+  @override
+  void dispose() {
+    username.dispose();
+    emailController.dispose();
+    phoneNumber.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +45,8 @@ class CustomSignupContainer extends StatelessWidget {
           child: ListView(
             scrollDirection: Axis.vertical,
             children: [
-           CustomTextField(
+              CustomTextField(
+                controller: username,
                 hintcolor: kBlack,
                 filledcolor: kveryWhite,
                 icon: Icons.person,
@@ -35,6 +56,7 @@ class CustomSignupContainer extends StatelessWidget {
               ),
               SizedBox(height: h * .04),
               CustomTextField(
+                controller: emailController,
                 hintcolor: kBlack,
                 filledcolor: kveryWhite,
                 icon: Icons.mail_outline_outlined,
@@ -43,7 +65,8 @@ class CustomSignupContainer extends StatelessWidget {
                 keyboardType: TextInputType.emailAddress,
               ),
               SizedBox(height: h * .04),
-                CustomTextField(
+              CustomTextField(
+                controller: phoneNumber,
                 hintcolor: kBlack,
                 filledcolor: kveryWhite,
                 icon: Icons.phone,
@@ -52,13 +75,16 @@ class CustomSignupContainer extends StatelessWidget {
                 keyboardType: TextInputType.number,
               ),
               SizedBox(height: h * .04),
-              const CustomPasswordtextfield(),
+              CustomPasswordtextfield(
+                controller: passwordController,
+              ),
               SizedBox(
                 height: h * .03,
               ),
-              const Padding(
-                padding: EdgeInsets.only(left: 35, right: 35),
-                child: CustomButton(text: 'Sign up'),
+              Padding(
+                padding: const EdgeInsets.only(left: 35, right: 35),
+                child: GestureDetector(
+                    onTap: signUP, child: const CustomButton(text: 'Sign up')),
               ),
               SizedBox(
                 height: h * .03,
@@ -135,5 +161,14 @@ class CustomSignupContainer extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future signUP() async {
+    await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: emailController.text.trim(),
+        password: passwordController.text.trim());
+    Navigator.push(
+        // ignore: use_build_context_synchronously
+        context, MaterialPageRoute(builder: (context) => const Auth()));
   }
 }
