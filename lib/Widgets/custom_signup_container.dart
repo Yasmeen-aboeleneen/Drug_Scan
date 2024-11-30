@@ -25,7 +25,7 @@ class CustomSignupContainer extends StatelessWidget {
           child: ListView(
             scrollDirection: Axis.vertical,
             children: [
-              const CustomTextField(
+           CustomTextField(
                 hintcolor: kBlack,
                 filledcolor: kveryWhite,
                 icon: Icons.person,
@@ -34,7 +34,7 @@ class CustomSignupContainer extends StatelessWidget {
                 keyboardType: TextInputType.text,
               ),
               SizedBox(height: h * .04),
-              const CustomTextField(
+              CustomTextField(
                 hintcolor: kBlack,
                 filledcolor: kveryWhite,
                 icon: Icons.mail_outline_outlined,
@@ -43,7 +43,7 @@ class CustomSignupContainer extends StatelessWidget {
                 keyboardType: TextInputType.emailAddress,
               ),
               SizedBox(height: h * .04),
-              const CustomTextField(
+                CustomTextField(
                 hintcolor: kBlack,
                 filledcolor: kveryWhite,
                 icon: Icons.phone,

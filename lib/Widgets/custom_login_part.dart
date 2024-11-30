@@ -1,17 +1,31 @@
 import 'package:drug_scan_app/Core/Constants/colors.dart';
 import 'package:drug_scan_app/Views/Auth/forgot_password_screen.dart';
 import 'package:drug_scan_app/Views/Auth/sign_up_screen.dart';
-import 'package:drug_scan_app/Views/Home/home_screen.dart';
 import 'package:drug_scan_app/Widgets/custom_button.dart';
 import 'package:drug_scan_app/Widgets/custom_password_field.dart';
 import 'package:drug_scan_app/Widgets/custom_social_button.dart';
 import 'package:drug_scan_app/Widgets/custom_text_field.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class CustomLoginContainer extends StatelessWidget {
-  const CustomLoginContainer({super.key});
+class CustomLoginContainer extends StatefulWidget {
+  CustomLoginContainer({super.key});
+
+  @override
+  State<CustomLoginContainer> createState() => _CustomLoginContainerState();
+}
+
+class _CustomLoginContainerState extends State<CustomLoginContainer> {
+  final emailController = TextEditingController();
+
+  final passwordController = TextEditingController();
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,8 +44,9 @@ class CustomLoginContainer extends StatelessWidget {
                 decorationColor: kveryWhite,
                 fontWeight: FontWeight.bold),
           ),
-          SizedBox(height: h * .09 ),
-          const CustomTextField(
+          SizedBox(height: h * .09),
+          CustomTextField(
+            controller: emailController,
             filledcolor: kveryWhite,
             icon: Icons.mail_outline_outlined,
             hintText: 'Enter your email',
@@ -40,7 +55,9 @@ class CustomLoginContainer extends StatelessWidget {
             hintcolor: kBlack,
           ),
           SizedBox(height: h * .05),
-          const CustomPasswordtextfield(),
+          CustomPasswordtextfield(
+            controller: passwordController,
+          ),
           SizedBox(height: h * .02),
           Padding(
             padding: const EdgeInsets.only(right: 20),
@@ -68,9 +85,7 @@ class CustomLoginContainer extends StatelessWidget {
             height: h * .06,
           ),
           GestureDetector(
-              onTap: () {
-               Get.to(() =>const HomeScreen());
-              },
+              onTap: signIN,
               child: const CustomButton(
                 text: 'Login',
               )),
@@ -141,5 +156,11 @@ class CustomLoginContainer extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Future signIN() async {
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: emailController.text.trim(),
+        password: passwordController.text.trim());
   }
 }

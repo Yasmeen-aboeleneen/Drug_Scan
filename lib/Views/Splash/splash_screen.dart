@@ -1,5 +1,5 @@
 import 'package:drug_scan_app/Core/Constants/colors.dart';
-import 'package:drug_scan_app/Views/Auth/login_screen.dart';
+import 'package:drug_scan_app/Views/Home/home_screen.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -36,7 +36,7 @@ class _SplashScreenState extends State<SplashScreen>
       if (status == AnimationStatus.completed) {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            builder: (context) => const LoginScreen(),
+            builder: (context) => const HomeScreen(),
           ),
         );
       }
@@ -58,7 +58,7 @@ class _SplashScreenState extends State<SplashScreen>
           animation: _animation,
           builder: (context, child) {
             return Transform.scale(
-              scale: _animation.value, 
+              scale: _animation.value,
               child: child,
             );
           },
