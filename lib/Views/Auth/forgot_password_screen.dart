@@ -7,13 +7,13 @@ class ForgotPasswordScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       backgroundColor: kveryWhite,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const Text('Enter your email to reset password'),
+          Text('Enter your email to reset password'),
           CustomTextField(
               hintcolor: kveryWhite,
               filledcolor: kPrimary,

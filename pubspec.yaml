@@ -36,11 +36,14 @@ dependencies:
   firebase_storage: ^12.3.5
   flutter:
     sdk: flutter
+  flutter_intl_phone_field: ^0.0.4
+  flutter_localization: ^0.2.3
   get: ^4.6.6
   google_fonts: ^6.2.1
   google_mlkit_text_recognition: ^0.14.0
   google_sign_in: ^6.2.2
   image_picker: ^1.1.2
+  intl: ^0.20.1
   url_launcher: ^6.3.1
 
 dev_dependencies:
@@ -88,3 +91,5 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+flutter_intl:
+  enabled: true

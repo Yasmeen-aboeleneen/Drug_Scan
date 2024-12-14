@@ -1,8 +1,8 @@
 import 'dart:io';
 
+import 'package:drug_scan_app/Core/Components/side_bar.dart';
 import 'package:drug_scan_app/Core/Constants/colors.dart';
 import 'package:drug_scan_app/Views/Home/examination_screen.dart';
-import 'package:drug_scan_app/Views/Profile/profile_screen.dart';
 import 'package:drug_scan_app/Widgets/custom_capture_button.dart';
 import 'package:drug_scan_app/Widgets/image_container.dart';
 import 'package:flutter/material.dart';
@@ -26,6 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
       });
       // التنقل إلى صفحة عرض الصورة
       Navigator.push(
+        // ignore: use_build_context_synchronously
         context,
         MaterialPageRoute(
           builder: (context) => ExaminationScreen(imageFile: _imageFile!),
@@ -55,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const ProfileScreen()));
+                            builder: (context) =>  const SideBar()));
                   },
                   icon: const Icon(
                     Icons.person_2_rounded,

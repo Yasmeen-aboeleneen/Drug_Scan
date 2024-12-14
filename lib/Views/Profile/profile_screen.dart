@@ -18,7 +18,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       body: Column(
         children: [
           Text(user.email!),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
            

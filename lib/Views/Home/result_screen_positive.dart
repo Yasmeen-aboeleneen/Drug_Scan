@@ -142,7 +142,7 @@ class ResultScreenIsPositive extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () => _showExitDialog(context),
-                  child: const Buttons(color: kRed, text: "Ignore"),
+                  child: const Buttons(color: kRed, text: "Exit"),
                 )
               ],
             )
