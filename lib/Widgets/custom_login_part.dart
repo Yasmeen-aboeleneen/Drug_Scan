@@ -228,13 +228,34 @@ class _CustomLoginContainerState extends State<CustomLoginContainer> {
             code: 'sign-in-cancelled', message: 'تم إلغاء تسجيل الدخول.');
       }
 
-      final GoogleSignInAuthentication? googleAuth =
+      final GoogleSignInAuthentication googleAuth =
           await googleUser.authentication;
 
       final credential = GoogleAuthProvider.credential(
-        accessToken: googleAuth?.accessToken,
-        idToken: googleAuth?.idToken,
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
       );
+
+      // التحقق من وجود البريد الإلكتروني مسبقًا
+      final email = googleUser.email;
+      final signInMethods =
+          // ignore: deprecated_member_use
+          await FirebaseAuth.instance.fetchSignInMethodsForEmail(email);
+
+      if (signInMethods.isEmpty) {
+        // البريد الإلكتروني غير مسجل مسبقًا
+        showDialog(
+          context: context,
+          builder: (context) {
+            return const AlertDialog(
+              title: Text("حساب غير مسجل"),
+              content: Text(
+                  "البريد الإلكتروني الخاص بك غير مسجل. يرجى إنشاء حساب جديد."),
+            );
+          },
+        );
+        return; // إيقاف العملية هنا
+      }
 
       // تسجيل الدخول باستخدام بيانات الاعتماد
       await FirebaseAuth.instance.signInWithCredential(credential);
