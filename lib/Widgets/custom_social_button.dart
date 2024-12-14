@@ -1,5 +1,4 @@
 import 'package:drug_scan_app/Core/Constants/colors.dart';
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -8,9 +7,11 @@ class SocialmediaRow extends StatelessWidget {
     super.key,
     required this.image,
     required this.text,
+    required this.ontap,
   });
   final String image;
   final String text;
+  final VoidCallback ontap;
   @override
   Widget build(BuildContext context) {
     var w = MediaQuery.of(context).size.width;
@@ -22,10 +23,10 @@ class SocialmediaRow extends StatelessWidget {
           decoration: const BoxDecoration(
               color: kveryWhite,
               borderRadius: BorderRadius.all(Radius.circular(15))),
-          width: w * .36,
+          width: w * .5,
           height: h * .06,
           child: GestureDetector(
-            onTap: () {},
+            onTap: ontap,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,

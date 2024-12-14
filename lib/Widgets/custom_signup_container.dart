@@ -1,9 +1,10 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:drug_scan_app/Core/Constants/colors.dart';
 import 'package:drug_scan_app/Views/Auth/auth.dart';
 import 'package:drug_scan_app/Views/Auth/login_screen.dart';
 import 'package:drug_scan_app/Widgets/custom_button.dart';
 import 'package:drug_scan_app/Widgets/custom_password_field.dart';
-import 'package:drug_scan_app/Widgets/custom_social_button.dart';
 import 'package:drug_scan_app/Widgets/custom_text_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -19,15 +20,103 @@ class CustomSignupContainer extends StatefulWidget {
 class _CustomSignupContainerState extends State<CustomSignupContainer> {
   final username = TextEditingController();
   final emailController = TextEditingController();
+  final parentemailController = TextEditingController();
   final phoneNumber = TextEditingController();
   final passwordController = TextEditingController();
+
   @override
   void dispose() {
     username.dispose();
     emailController.dispose();
+    parentemailController.dispose();
     phoneNumber.dispose();
     passwordController.dispose();
     super.dispose();
+  }
+
+  bool isValidPhoneNumber(String phoneNumber) {
+    final RegExp phoneRegExp = RegExp(r'^(010|011|012|015)\d{8}$');
+    return phoneRegExp.hasMatch(phoneNumber);
+  }
+
+  Future<void> signUp() async {
+    try {
+      if (!isValidPhoneNumber(phoneNumber.text.trim())) {
+        showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: const Text(
+                "Invalid Phone Number",
+                style: TextStyle(color: kPrimary, fontSize: 15),
+              ),
+              content: const Text(
+                  'رقم الهاتف المدخل غير صالح. يرجى إدخال رقم صحيح.'),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text('OK'),
+                ),
+              ],
+            );
+          },
+        );
+        return;
+      }
+
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: emailController.text.trim(),
+        password: passwordController.text.trim(),
+      );
+
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const Auth()),
+      );
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'email-already-in-use') {
+        showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: const Text(
+                "Error",
+                style: TextStyle(color: kPrimary, fontSize: 15),
+              ),
+              content: const Text('هذا البريد الإلكتروني مسجل مسبقاً'),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text('OK'),
+                ),
+              ],
+            );
+          },
+        );
+      } else {
+        showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: const Text("Error"),
+              content: Text('${e.message}'),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text("OK"),
+                ),
+              ],
+            );
+          },
+        );
+      }
+    }
   }
 
   @override
@@ -66,6 +155,16 @@ class _CustomSignupContainerState extends State<CustomSignupContainer> {
               ),
               SizedBox(height: h * .04),
               CustomTextField(
+                controller: parentemailController,
+                hintcolor: kBlack,
+                filledcolor: kveryWhite,
+                icon: Icons.mail_outline_outlined,
+                hintText: "Enter your parent's email",
+                iconColor: kPrimary,
+                keyboardType: TextInputType.emailAddress,
+              ),
+              SizedBox(height: h * .04),
+              CustomTextField(
                 controller: phoneNumber,
                 hintcolor: kBlack,
                 filledcolor: kveryWhite,
@@ -84,48 +183,10 @@ class _CustomSignupContainerState extends State<CustomSignupContainer> {
               Padding(
                 padding: const EdgeInsets.only(left: 35, right: 35),
                 child: GestureDetector(
-                    onTap: signUP, child: const CustomButton(text: 'Sign up')),
+                    onTap: signUp, child: const CustomButton(text: 'Sign up')),
               ),
               SizedBox(
                 height: h * .03,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: Container(
-                      height: 2,
-                      color: kveryWhite,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Text(
-                      "Or Sign up with",
-                      style: GoogleFonts.notoSans(
-                        color: kveryWhite,
-                        fontSize: w * .04,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Container(
-                      height: 2,
-                      color: kveryWhite,
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: h * .01,
-              ),
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  SocialmediaRow(image: "Assets/google.jpg", text: "Google"),
-                  SocialmediaRow(image: "Assets/facebook.png", text: "Facebook")
-                ],
               ),
               SizedBox(
                 height: h * .02,
@@ -161,14 +222,5 @@ class _CustomSignupContainerState extends State<CustomSignupContainer> {
         ),
       ),
     );
-  }
-
-  Future signUP() async {
-    await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: emailController.text.trim(),
-        password: passwordController.text.trim());
-    Navigator.push(
-        // ignore: use_build_context_synchronously
-        context, MaterialPageRoute(builder: (context) => const Auth()));
   }
 }

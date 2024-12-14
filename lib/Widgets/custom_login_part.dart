@@ -1,4 +1,7 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:drug_scan_app/Core/Constants/colors.dart';
+import 'package:drug_scan_app/Views/Auth/auth.dart';
 import 'package:drug_scan_app/Views/Auth/forgot_password_screen.dart';
 import 'package:drug_scan_app/Views/Auth/sign_up_screen.dart';
 import 'package:drug_scan_app/Widgets/custom_button.dart';
@@ -8,6 +11,7 @@ import 'package:drug_scan_app/Widgets/custom_text_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class CustomLoginContainer extends StatefulWidget {
   const CustomLoginContainer({super.key});
@@ -123,11 +127,14 @@ class _CustomLoginContainerState extends State<CustomLoginContainer> {
           SizedBox(
             height: h * .02,
           ),
-          const Row(
+          Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              SocialmediaRow(image: "Assets/google.jpg", text: "Google"),
-              SocialmediaRow(image: "Assets/facebook.png", text: "Facebook")
+              SocialmediaRow(
+                image: "Assets/google.jpg",
+                text: "Google",
+                ontap: signInWithGoogle,
+              ),
             ],
           ),
           SizedBox(
@@ -159,8 +166,90 @@ class _CustomLoginContainerState extends State<CustomLoginContainer> {
   }
 
   Future signIN() async {
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: emailController.text.trim(),
-        password: passwordController.text.trim());
+        password: passwordController.text.trim(),
+      );
+
+      // الانتقال إلى الشاشة الرئيسية عند نجاح تسجيل الدخول
+      if (!mounted) return;
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const Auth()),
+      );
+    } on FirebaseAuthException catch (e) {
+      String errorMessage;
+      if (e.code == 'wrong-password') {
+        errorMessage = 'كلمة المرور غير صحيحة.';
+      } else if (e.code == 'user-not-found') {
+        errorMessage = 'البريد الإلكتروني غير مسجل.';
+      } else if (e.code == 'invalid-email') {
+        errorMessage = 'صيغة البريد الإلكتروني غير صحيحة.';
+      } else if (e.code == 'too-many-requests') {
+        errorMessage =
+            'تم حظر محاولات تسجيل الدخول مؤقتاً بسبب محاولات عديدة خاطئة.';
+      } else {
+        errorMessage = 'حدث خطأ: ${e.message}';
+      }
+
+      // عرض رسالة الخطأ
+      if (!mounted) return;
+      showErrorDialog(context, errorMessage);
+    }
+  }
+
+  void showErrorDialog(BuildContext context, String message) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('خطأ'),
+          content: Text(message),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text('حسناً'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<void> signInWithGoogle() async {
+    try {
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+      if (googleUser == null) {
+        throw FirebaseAuthException(
+            code: 'sign-in-cancelled', message: 'تم إلغاء تسجيل الدخول.');
+      }
+
+      final GoogleSignInAuthentication? googleAuth =
+          await googleUser.authentication;
+
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken,
+        idToken: googleAuth?.idToken,
+      );
+
+      // تسجيل الدخول باستخدام بيانات الاعتماد
+      await FirebaseAuth.instance.signInWithCredential(credential);
+
+      // الانتقال إلى صفحة Auth بعد تسجيل الدخول بنجاح
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const Auth()),
+      );
+    } on FirebaseAuthException catch (e) {
+      // التعامل مع الأخطاء الخاصة بـ FirebaseAuthException
+      showErrorDialog(context, e.message ?? 'حدث خطأ أثناء تسجيل الدخول.');
+    } catch (e) {
+      // التعامل مع أي أخطاء أخرى
+      showErrorDialog(context, 'حدث خطأ أثناء تسجيل الدخول باستخدام Google.');
+    }
   }
 }
