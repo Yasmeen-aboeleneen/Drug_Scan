@@ -1,11 +1,12 @@
 import 'dart:io';
 
-import 'package:drug_scan_app/Core/Components/side_bar.dart';
 import 'package:drug_scan_app/Core/Constants/colors.dart';
 import 'package:drug_scan_app/Views/Home/examination_screen.dart';
+import 'package:drug_scan_app/Views/Lang/language_screen.dart';
 import 'package:drug_scan_app/Widgets/custom_capture_button.dart';
 import 'package:drug_scan_app/Widgets/image_container.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -24,7 +25,6 @@ class _HomeScreenState extends State<HomeScreen> {
       setState(() {
         _imageFile = File(pickedFile.path);
       });
-      // التنقل إلى صفحة عرض الصورة
       Navigator.push(
         // ignore: use_build_context_synchronously
         context,
@@ -56,10 +56,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>  const SideBar()));
+                            builder: (context) => const LanguageScreen()));
                   },
                   icon: const Icon(
-                    Icons.person_2_rounded,
+                    Icons.language_outlined,
                     color: kveryWhite,
                   )),
             ),
@@ -79,16 +79,16 @@ class _HomeScreenState extends State<HomeScreen> {
                   padding: EdgeInsets.only(left: w * .01),
                   child: GestureDetector(
                     onTap: () => _pickImage(ImageSource.camera),
-                    child: const CustomCaptureButton(
-                        text: 'Capture image', icon: Icons.camera_alt),
+                    child: CustomCaptureButton(
+                        text: 'Captureimage'.tr, icon: Icons.camera_alt),
                   ),
                 ),
                 Padding(
                   padding: EdgeInsets.only(right: w * .01),
                   child: GestureDetector(
                     onTap: () => _pickImage(ImageSource.gallery),
-                    child: const CustomCaptureButton(
-                        text: 'From gallery', icon: Icons.photo),
+                    child: CustomCaptureButton(
+                        text: 'FromGallery'.tr, icon: Icons.photo),
                   ),
                 )
               ],

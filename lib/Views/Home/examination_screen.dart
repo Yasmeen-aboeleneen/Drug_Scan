@@ -1,7 +1,6 @@
 import 'dart:io';
-
-import 'package:drug_scan_app/Views/Home/result_screen_negative.dart';
 import 'package:drug_scan_app/Views/Home/result_screen_positive.dart';
+import 'package:drug_scan_app/Views/Home/result_screen_negative.dart'; // شاشة الحالة السلبية
 import 'package:drug_scan_app/Widgets/scan_button.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
@@ -18,8 +17,18 @@ class ExaminationScreen extends StatefulWidget {
 }
 
 class _ExaminationScreenState extends State<ExaminationScreen> {
-  String _scanResult = "Processing...";
+  String _scanResult = "Processing...".tr;
   bool _isScanning = false;
+
+  // قائمة بأسماء المخدرات المطلوبة
+  final List<String> drugNames = [
+    "cannabinoids",
+    "opiate",
+    "tramadol",
+    "heroin",
+    "morphine",
+    "positive"
+  ];
 
   Future<void> _scanImage() async {
     final textRecognizer = TextRecognizer();
@@ -34,24 +43,57 @@ class _ExaminationScreenState extends State<ExaminationScreen> {
         _isScanning = false;
       });
 
-      if (_scanResult.toLowerCase().contains("cannabinoids") ||
-          _scanResult.toLowerCase().contains("Opiate") ||
-          _scanResult.toLowerCase().contains("tramadol") ||
-          _scanResult.toLowerCase().contains("Heroin") ||
-          _scanResult.toLowerCase().contains("positive") ||
-          _scanResult.toLowerCase().contains("morphine")) {
-        Get.to(() => const ResultScreenIsPositive(result: "Positive"));
+      // التحقق مما إذا كان النص يحتوي على أي من أسماء المخدرات
+      final containsDrug = drugNames.any(
+          (drug) => _scanResult.toLowerCase().contains(drug.toLowerCase()));
+
+      if (containsDrug) {
+        // تحديد نوع المخدر الذي تم اكتشافه
+        String detectedDrug = drugNames.firstWhere(
+          (drug) => _scanResult.toLowerCase().contains(drug.toLowerCase()),
+          orElse: () => "Unknown",
+        );
+
+        // الانتقال إلى شاشة النتيجة الإيجابية مع نوع المخدر
+        Get.to(() => ResultScreenIsPositive(
+              result: "Positive".tr,
+              detectedDrug: detectedDrug,
+            ));
+      } else if (_scanResult.toLowerCase().contains("negative")) {
+        // إذا تم العثور على كلمة "negative" في النص
+        Get.to(() => ResultScreenIsNegative(
+              result: "Negative".tr,
+            ));
       } else {
-        Get.to(() => const ResultScreenIsNegative(result: "Negative"));
+        // إذا لم يتم العثور على أي من أسماء المخدرات أو كلمة "negative"
+        _showErrorDialog(
+            "Invalid Image", "The image does not contain any drug type.");
       }
     } catch (e) {
       setState(() {
         _scanResult = "Error occurred while scanning: $e";
         _isScanning = false;
       });
+      _showErrorDialog("Error", "An error occurred while scanning the image.");
     } finally {
       textRecognizer.close();
     }
+  }
+
+  void _showErrorDialog(String title, String message) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(title),
+        content: Text(message),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text("OK"),
+          ),
+        ],
+      ),
+    );
   }
 
   @override
@@ -105,8 +147,8 @@ class _ExaminationScreenState extends State<ExaminationScreen> {
               });
               _scanImage();
             },
-            child: const ScanButton(
-              text: "Start Scanning",
+            child: ScanButton(
+              text: "Start Scanning".tr,
             ),
           ),
           SizedBox(

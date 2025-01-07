@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:drug_scan_app/Core/Constants/colors.dart';
@@ -26,7 +27,7 @@ class ResultScreenIsNegative extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text(
-                  "  Your Result is : ",
+                  "Your Result is".tr,
                   style: GoogleFonts.lora(
                       color: kPrimary,
                       fontSize: w * .07,
@@ -55,7 +56,7 @@ class ResultScreenIsNegative extends StatelessWidget {
               child: Center(
                 child: Text(
                   textAlign: TextAlign.center,
-                  " Please go to the Student Affairs Department to complete the remaining procedures.",
+                  " Please go to the Student Affairs Department to complete the remaining procedures.".tr,
                   style: GoogleFonts.lora(
                       color: kRed,
                       fontSize: w * .06,

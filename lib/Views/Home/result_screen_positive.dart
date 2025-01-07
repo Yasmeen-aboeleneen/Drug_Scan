@@ -4,22 +4,29 @@ import 'package:drug_scan_app/Core/Utils/notification_helper.dart';
 import 'package:drug_scan_app/Views/Home/prescription.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'dart:io';
 import 'package:permission_handler/permission_handler.dart';
 
 class ResultScreenIsPositive extends StatelessWidget {
-  const ResultScreenIsPositive({super.key, required this.result});
+  const ResultScreenIsPositive({
+    super.key,
+    required this.result,
+    required this.detectedDrug, // نوع المخدر الذي تم اكتشافه
+  });
   final String result;
-
+  final String detectedDrug;
 
   Future<void> requestExactAlarmPermission(BuildContext context) async {
     if (Platform.isAndroid) {
       final status = await Permission.notification.request();
       if (status.isDenied) {
-        // إذا تم رفض الإذن
+        // ignore: use_build_context_synchronously
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Permission denied! Please enable notification permissions.')),
+          const SnackBar(
+              content: Text(
+                  'Permission denied! Please enable notification permissions.')),
         );
       }
     }
@@ -82,8 +89,8 @@ class ResultScreenIsPositive extends StatelessWidget {
   }
 
   void handleScheduleNotification(BuildContext context) async {
-    await requestExactAlarmPermission(context); 
-    scheduleFollowUpNotification(); 
+    await requestExactAlarmPermission(context);
+    scheduleFollowUpNotification();
   }
 
   @override
@@ -100,7 +107,7 @@ class ResultScreenIsPositive extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text(
-                  "  Your Result is : ",
+                  "Your Result is".tr,
                   style: GoogleFonts.lora(
                     color: kPrimary,
                     fontSize: w * .07,
@@ -117,6 +124,15 @@ class ResultScreenIsPositive extends StatelessWidget {
                 ),
               ],
             ),
+            SizedBox(height: h * .02),
+            Text(
+              "Detected Drug: $detectedDrug".tr, 
+              style: GoogleFonts.lora(
+                color: kPrimary,
+                fontSize: w * .06,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
             SizedBox(height: h * .05),
             SizedBox(
               width: w,
@@ -124,7 +140,7 @@ class ResultScreenIsPositive extends StatelessWidget {
               child: Center(
                 child: Text(
                   textAlign: TextAlign.center,
-                  "You must take the remedial course in order to be accepted into the college.",
+                  "You must take the remedial course in order to be accepted into the college.".tr,
                   style: GoogleFonts.lora(
                     color: kRed,
                     fontSize: w * .065,
@@ -145,13 +161,13 @@ class ResultScreenIsPositive extends StatelessWidget {
                         builder: (context) => const Prescription(),
                       ),
                     );
-                    handleScheduleNotification(context); 
+                    handleScheduleNotification(context);
                   },
-                  child: const Buttons(color: kPrimary, text: "Prescription"),
+                  child:  Buttons(color: kPrimary, text: "Prescription".tr),
                 ),
                 GestureDetector(
                   onTap: () => _showExitDialog(context),
-                  child: const Buttons(color: kRed, text: "Exit"),
+                  child:   Buttons(color: kRed, text: "Exit".tr),
                 )
               ],
             )

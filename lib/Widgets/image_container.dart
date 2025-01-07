@@ -1,5 +1,6 @@
 import 'package:drug_scan_app/Core/Constants/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ImageContainer extends StatelessWidget {
@@ -17,7 +18,7 @@ class ImageContainer extends StatelessWidget {
       ),
       child: Center(
         child: Text(
-          'Upload your medical\n examination result',
+          'Upload your medical\n examination result'.tr,
           style: GoogleFonts.aBeeZee(
               fontWeight: FontWeight.w700, fontSize: w * .08, color: kPrimary),
         ),

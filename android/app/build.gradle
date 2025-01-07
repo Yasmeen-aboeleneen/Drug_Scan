@@ -8,13 +8,13 @@ plugins {
 
 android {
     namespace = "com.example.drug_scan_app" // Ensure this matches your package name
-    compileSdk = 34 // Ensure compatibility with targetSdk
+    compileSdk = 35 // Ensure compatibility with targetSdk
     ndkVersion = flutter.ndkVersion
 
     defaultConfig {
         applicationId = "com.example.drug_scan_app" // Match your namespace
         minSdkVersion 23  
-        targetSdk = 34
+        targetSdk = 33
         versionCode = flutter.versionCode
         versionName = flutter.versionName
 
@@ -35,6 +35,8 @@ android {
         release {
             // Add signing config here for production builds if needed
             signingConfig signingConfigs.debug
+             minifyEnabled false  // Disable shrinking and obfuscation for testing
+             shrinkResources false
         }
     }
 }
@@ -44,6 +46,11 @@ flutter {
 }
 
 dependencies {
-    implementation 'androidx.multidex:multidex:2.0.1' // Ensure MultiDex support
+    implementation 'androidx.multidex:multidex:2.0.1'
+    implementation platform('com.google.firebase:firebase-bom:32.0.0')
+    implementation 'com.google.mlkit:text-recognition:16.0.0'
+    implementation 'com.google.mlkit:text-recognition-devanagari:16.0.0'
+    implementation 'com.google.mlkit:text-recognition-japanese:16.0.0'
+    implementation 'com.google.mlkit:text-recognition-korean:16.0.0' // Ensure MultiDex support
     // Add other dependencies here if required
 }

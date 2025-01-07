@@ -1,5 +1,6 @@
 import 'package:drug_scan_app/Core/Constants/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Prescription extends StatelessWidget {
@@ -15,7 +16,7 @@ class Prescription extends StatelessWidget {
         iconTheme: const IconThemeData(color: kveryWhite),
         centerTitle: true,
         title: Text(
-          "Treatment Plan",
+          "Treatment Plan".tr,
           style:
               GoogleFonts.lora(color: kveryWhite, fontWeight: FontWeight.bold),
         ),
@@ -27,7 +28,7 @@ class Prescription extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Follow the below steps for your recovery:",
+              "Follow the below steps for your recovery:".tr,
               style: GoogleFonts.lora(
                   color: kPrimary,
                   fontSize: w * .05,
@@ -83,7 +84,7 @@ class Prescription extends StatelessWidget {
             SizedBox(height: h * 0.04),
             Center(
               child: Text(
-                "A follow-up test notification will be sent in 2 weeks.",
+                "A follow-up test notification will be sent in 2 weeks.".tr,
                 textAlign: TextAlign.center,
                 style: GoogleFonts.lora(
                     color: kRed,
