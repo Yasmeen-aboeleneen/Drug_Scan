@@ -13,12 +13,10 @@ class ResultScreenIsNegative extends StatelessWidget {
   });
   final String result;
 
-  // دالة لحفظ نتيجة التحليل في Firestore
-  Future<void> _saveAnalysisResult() async {
+   Future<void> _saveAnalysisResult() async {
     final user = FirebaseAuth.instance.currentUser;
     if (user != null) {
-      // جلب اسم المستخدم من Firestore
-      final userDoc = await FirebaseFirestore.instance
+       final userDoc = await FirebaseFirestore.instance
           .collection('users')
           .doc(user.uid)
           .get();
@@ -26,10 +24,10 @@ class ResultScreenIsNegative extends StatelessWidget {
 
       await FirebaseFirestore.instance.collection('analysis_results').add({
         'userId': user.uid,
-        'userName': userName, // استخدام اسم المستخدم
+        'userName': userName, 
         'userEmail': user.email,
         'result': result,
-        'timestamp': FieldValue.serverTimestamp(), // لحفظ وقت إضافة النتيجة
+        'timestamp': FieldValue.serverTimestamp(), 
       });
     }
   }
@@ -39,8 +37,7 @@ class ResultScreenIsNegative extends StatelessWidget {
     var h = MediaQuery.of(context).size.height;
     var w = MediaQuery.of(context).size.width;
 
-    // حفظ النتيجة عند بناء الشاشة
-    _saveAnalysisResult();
+     _saveAnalysisResult();
 
     return Scaffold(
       backgroundColor: kveryWhite,
