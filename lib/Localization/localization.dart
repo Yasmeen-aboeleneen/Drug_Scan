@@ -8,7 +8,7 @@ class MyLocalization implements Translations {
           "FromGallery": "الاستديو",
           "Captureimage": "التقط صورة",
           "Your Result is": "النتيجة: ",
-          "Detected Drug:": "نوع المخدر",
+          "Detected Drug:": " : نوع المخدر",
           "You must take the remedial course in order to be accepted into the college.":
               "يجب عليك أن تأخذ الدورة العلاجية حتى يتم قبولك في الكلية.",
           "Exit": "خروج",
@@ -31,8 +31,8 @@ class MyLocalization implements Translations {
           "Choose Language": "Choose Language",
           "FromGallery": "From gallery",
           "Captureimage": "Capture image",
-          "Your Result is": "Your Result is:",
-          "Detected Drug:": "Detected Drug:",
+          "Your Result is": "Your Result is : ",
+          "Detected Drug:": "Detected Drug : ",
           "You must take the remedial course in order to be accepted into the college.":
               "You must take the remedial course in order to be accepted into the college.",
           "Exit": "Exit",

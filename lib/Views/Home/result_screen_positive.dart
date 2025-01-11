@@ -8,15 +8,56 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'dart:io';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class ResultScreenIsPositive extends StatelessWidget {
   const ResultScreenIsPositive({
     super.key,
     required this.result,
-    required this.detectedDrug, // نوع المخدر الذي تم اكتشافه
+    required this.detectedDrug,
   });
   final String result;
   final String detectedDrug;
+
+  Future<void> _saveAnalysisResult() async {
+    try {
+      final user = FirebaseAuth.instance.currentUser;
+      if (user != null) {
+        final userDoc = await FirebaseFirestore.instance
+            .collection('users')
+            .doc(user.uid)
+            .get();
+        final userName =
+            userDoc.data()?['username'] ?? user.displayName ?? 'Unknown User';
+
+        await FirebaseFirestore.instance.collection('analysis_results').add({
+          'userId': user.uid,
+          'userName': userName,
+          'userEmail': user.email,
+          'result': result,
+          'detectedDrug': detectedDrug,
+          'timestamp': FieldValue.serverTimestamp(),
+        });
+
+        Get.snackbar(
+          'Success',
+          'Analysis result saved successfully!',
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.green,
+          colorText: Colors.white,
+        );
+      }
+    } catch (e) {
+      Get.snackbar(
+        'Error',
+        'Failed to save analysis result: $e',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
+    }
+  }
 
   Future<void> requestExactAlarmPermission(BuildContext context) async {
     if (Platform.isAndroid) {
@@ -25,8 +66,9 @@ class ResultScreenIsPositive extends StatelessWidget {
         // ignore: use_build_context_synchronously
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-              content: Text(
-                  'Permission denied! Please enable notification permissions.')),
+            content: Text(
+                'Permission denied! Please enable notification permissions.'),
+          ),
         );
       }
     }
@@ -37,7 +79,7 @@ class ResultScreenIsPositive extends StatelessWidget {
       context: context,
       builder: (context) => AlertDialog(
         title: Text(
-          'Exit Application',
+          'Exit Application'.tr,
           style: GoogleFonts.aBeeZee(
             color: kRed,
             fontWeight: FontWeight.bold,
@@ -45,7 +87,7 @@ class ResultScreenIsPositive extends StatelessWidget {
           ),
         ),
         content: Text(
-          'Are you sure you want to exit?',
+          'Are you sure you want to exit?'.tr,
           style: GoogleFonts.aBeeZee(
             color: kPrimary,
             fontWeight: FontWeight.bold,
@@ -58,7 +100,7 @@ class ResultScreenIsPositive extends StatelessWidget {
               Navigator.of(context).pop();
             },
             child: Text(
-              'Cancel',
+              'Cancel'.tr,
               style: GoogleFonts.aBeeZee(
                 color: kPrimary,
                 fontWeight: FontWeight.bold,
@@ -75,7 +117,7 @@ class ResultScreenIsPositive extends StatelessWidget {
               }
             },
             child: Text(
-              'Exit',
+              'Exit'.tr,
               style: GoogleFonts.aBeeZee(
                 color: kRed,
                 fontWeight: FontWeight.bold,
@@ -97,6 +139,9 @@ class ResultScreenIsPositive extends StatelessWidget {
   Widget build(BuildContext context) {
     var h = MediaQuery.of(context).size.height;
     var w = MediaQuery.of(context).size.width;
+
+    _saveAnalysisResult();
+
     return Scaffold(
       backgroundColor: kveryWhite,
       body: SingleChildScrollView(
@@ -106,6 +151,9 @@ class ResultScreenIsPositive extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
+                SizedBox(
+                  width: w * .03,
+                ),
                 Text(
                   "Your Result is".tr,
                   style: GoogleFonts.lora(
@@ -126,7 +174,7 @@ class ResultScreenIsPositive extends StatelessWidget {
             ),
             SizedBox(height: h * .02),
             Text(
-              "Detected Drug: $detectedDrug".tr, 
+              "Detected Drug: $detectedDrug".tr,
               style: GoogleFonts.lora(
                 color: kPrimary,
                 fontSize: w * .06,
@@ -140,7 +188,8 @@ class ResultScreenIsPositive extends StatelessWidget {
               child: Center(
                 child: Text(
                   textAlign: TextAlign.center,
-                  "You must take the remedial course in order to be accepted into the college.".tr,
+                  "You must take the remedial course in order to be accepted into the college."
+                      .tr,
                   style: GoogleFonts.lora(
                     color: kRed,
                     fontSize: w * .065,
@@ -163,11 +212,11 @@ class ResultScreenIsPositive extends StatelessWidget {
                     );
                     handleScheduleNotification(context);
                   },
-                  child:  Buttons(color: kPrimary, text: "Prescription".tr),
+                  child: Buttons(color: kPrimary, text: "Prescription".tr),
                 ),
                 GestureDetector(
                   onTap: () => _showExitDialog(context),
-                  child:   Buttons(color: kRed, text: "Exit".tr),
+                  child: Buttons(color: kRed, text: "Exit".tr),
                 )
               ],
             )

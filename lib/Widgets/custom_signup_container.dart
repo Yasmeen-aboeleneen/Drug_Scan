@@ -1,5 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:drug_scan_app/Core/Constants/colors.dart';
 import 'package:drug_scan_app/Views/Auth/auth.dart';
 import 'package:drug_scan_app/Views/Auth/login_screen.dart';
@@ -40,84 +41,99 @@ class _CustomSignupContainerState extends State<CustomSignupContainer> {
   }
 
   Future<void> signUp() async {
-    try {
-      if (!isValidPhoneNumber(phoneNumber.text.trim())) {
-        showDialog(
-          context: context,
-          builder: (context) {
-            return AlertDialog(
-              title: const Text(
-                "Invalid Phone Number",
-                style: TextStyle(color: kPrimary, fontSize: 15),
+  try {
+    // التحقق من صحة رقم الهاتف
+    if (!isValidPhoneNumber(phoneNumber.text.trim())) {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text(
+              "Invalid Phone Number",
+              style: TextStyle(color: kPrimary, fontSize: 15),
+            ),
+            content: const Text('رقم الهاتف المدخل غير صالح. يرجى إدخال رقم صحيح.'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text('OK'),
               ),
-              content: const Text(
-                  'رقم الهاتف المدخل غير صالح. يرجى إدخال رقم صحيح.'),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: const Text('OK'),
-                ),
-              ],
-            );
-          },
-        );
-        return;
-      }
-
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: emailController.text.trim(),
-        password: passwordController.text.trim(),
+            ],
+          );
+        },
       );
+      return;
+    }
 
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const Auth()),
-      );
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'email-already-in-use') {
-        showDialog(
-          context: context,
-          builder: (context) {
-            return AlertDialog(
-              title: const Text(
-                "Error",
-                style: TextStyle(color: kPrimary, fontSize: 15),
+    // إنشاء حساب المستخدم باستخدام FirebaseAuth
+    final userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      email: emailController.text.trim(),
+      password: passwordController.text.trim(),
+    );
+
+    // تحديث ملف المستخدم بإضافة displayName (اختياري)
+    await userCredential.user?.updateProfile(displayName: username.text.trim());
+
+    // حفظ بيانات المستخدم في Firestore
+    await FirebaseFirestore.instance.collection('users').doc(userCredential.user?.uid).set({
+      'username': username.text.trim(), // اسم المستخدم
+      'email': emailController.text.trim(), // البريد الإلكتروني
+      'parentEmail': parentemailController.text.trim(), // بريد ولي الأمر
+      'phoneNumber': phoneNumber.text.trim(), // رقم الهاتف
+      'createdAt': FieldValue.serverTimestamp(), // وقت إنشاء الحساب
+    });
+
+    // الانتقال إلى الشاشة التالية
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const Auth()),
+    );
+  } on FirebaseAuthException catch (e) {
+    // معالجة الأخطاء
+    if (e.code == 'email-already-in-use') {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text(
+              "Error",
+              style: TextStyle(color: kPrimary, fontSize: 15),
+            ),
+            content: const Text('هذا البريد الإلكتروني مسجل مسبقاً'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text('OK'),
               ),
-              content: const Text('هذا البريد الإلكتروني مسجل مسبقاً'),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: const Text('OK'),
-                ),
-              ],
-            );
-          },
-        );
-      } else {
-        showDialog(
-          context: context,
-          builder: (context) {
-            return AlertDialog(
-              title: const Text("Error"),
-              content: Text('${e.message}'),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: const Text("OK"),
-                ),
-              ],
-            );
-          },
-        );
-      }
+            ],
+          );
+        },
+      );
+    } else {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text("Error"),
+            content: Text('${e.message}'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text("OK"),
+              ),
+            ],
+          );
+        },
+      );
     }
   }
+}
 
   @override
   Widget build(BuildContext context) {
