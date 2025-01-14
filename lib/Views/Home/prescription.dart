@@ -37,61 +37,175 @@ class Prescription extends StatelessWidget {
             SizedBox(height: h * 0.02),
             Container(
               width: w,
-              height: h * .6,
+              height: h * .2,
+              decoration: const BoxDecoration(
+                  color: kGrey,
+                  borderRadius: BorderRadius.all(Radius.circular(8))),
+              child: Center(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(4),
+                        child: Text(
+                          "1. Take the prescribed medication daily.\n"
+                          "2. Avoid any substances causing issues.\n"
+                          "3. Follow up with your counselor weekly.\n"
+                          "4. Maintain a healthy lifestyle and stay hydrated.",
+                          style: GoogleFonts.lora(
+                              color: kBlack,
+                              fontSize: w * .045,
+                              fontWeight: FontWeight.w500),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(height: h * 0.04),
+            Text(
+              "Prescription",
+              style: GoogleFonts.lora(
+                  color: kRed, fontWeight: FontWeight.bold, fontSize: w * .06),
+            ),
+            SizedBox(height: h * 0.02),
+            Container(
+              padding: const EdgeInsets.all(5),
+              width: w,
+              height: h * .4,
               decoration: const BoxDecoration(
                   color: kGrey,
                   borderRadius: BorderRadius.all(Radius.circular(8))),
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(4),
-                      child: Text(
-                        "1. Take the prescribed medication daily.\n"
-                        "2. Avoid any substances causing issues.\n"
-                        "3. Follow up with your counselor weekly.\n"
-                        "4. Maintain a healthy lifestyle and stay hydrated."
-                        "1. Take the prescribed medication daily.\n"
-                        "2. Avoid any substances causing issues.\n"
-                        "3. Follow up with your counselor weekly.\n"
-                        "4. Maintain a healthy lifestyle and stay hydrated."
-                        "1. Take the prescribed medication daily.\n"
-                        "2. Avoid any substances causing issues.\n"
-                        "3. Follow up with your counselor weekly.\n"
-                        "4. Maintain a healthy lifestyle and stay hydrated."
-                        "1. Take the prescribed medication daily.\n"
-                        "2. Avoid any substances causing issues.\n"
-                        "3. Follow up with your counselor weekly.\n"
-                        "4. Maintain a healthy lifestyle and stay hydrated."
-                        "1. Take the prescribed medication daily.\n"
-                        "2. Avoid any substances causing issues.\n"
-                        "3. Follow up with your counselor weekly.\n"
-                        "4. Maintain a healthy lifestyle and stay hydrated."
-                        "1. Take the prescribed medication daily.\n"
-                        "2. Avoid any substances causing issues.\n"
-                        "3. Follow up with your counselor weekly.\n"
-                        "4. Maintain a healthy lifestyle and stay hydrated.",
-                        style: GoogleFonts.lora(
-                            color: kBlack,
-                            fontSize: w * .045,
-                            fontWeight: FontWeight.w500),
-                      ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Controloc 40 mg',
+                          style: GoogleFonts.lora(
+                              color: kBlack,
+                              fontSize: w * .045,
+                              fontWeight: FontWeight.w500),
+                        ),
+                        Text(
+                          'قرص قبل الفطار',
+                          style: GoogleFonts.lora(
+                              color: kBlack,
+                              fontSize: w * .045,
+                              fontWeight: FontWeight.w500),
+                        )
+                      ],
+                    ),
+                    SizedBox(height: h * 0.02),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Divakote  500 mg',
+                          style: GoogleFonts.lora(
+                              color: kBlack,
+                              fontSize: w * .045,
+                              fontWeight: FontWeight.w500),
+                        ),
+                        Text(
+                          textAlign: TextAlign.center,
+                          'قرص مرتين في اليوم\n (صباحا ومساء)',
+                          style: GoogleFonts.lora(
+                              color: kBlack,
+                              fontSize: w * .045,
+                              fontWeight: FontWeight.w500),
+                        )
+                      ],
+                    ),
+                    SizedBox(height: h * 0.02),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Arythrex  200 mg',
+                          style: GoogleFonts.lora(
+                              color: kBlack,
+                              fontSize: w * .045,
+                              fontWeight: FontWeight.w500),
+                        ),
+                        Text(
+                          'قرص بعد الغذاء',
+                          style: GoogleFonts.lora(
+                              color: kBlack,
+                              fontSize: w * .045,
+                              fontWeight: FontWeight.w500),
+                        )
+                      ],
+                    ),
+                    SizedBox(height: h * 0.02),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Gralipentin XR 300 mg',
+                          style: GoogleFonts.lora(
+                              color: kBlack,
+                              fontSize: w * .045,
+                              fontWeight: FontWeight.w500),
+                        ),
+                        Text(
+                          textAlign: TextAlign.center,
+                          'قرص مرتين في اليوم \n(صباحا ومساء)',
+                          style: GoogleFonts.lora(
+                              color: kBlack,
+                              fontSize: w * .045,
+                              fontWeight: FontWeight.w500),
+                        )
+                      ],
+                    ),
+                    SizedBox(height: h * 0.02),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Dogmatil 50 mg',
+                          style: GoogleFonts.lora(
+                              color: kBlack,
+                              fontSize: w * .045,
+                              fontWeight: FontWeight.w500),
+                        ),
+                        Text(
+                          textAlign: TextAlign.center,
+                          'قرص مرتين في اليوم \n(صباحا ومساء)',
+                          style: GoogleFonts.lora(
+                              color: kBlack,
+                              fontSize: w * .045,
+                              fontWeight: FontWeight.w500),
+                        )
+                      ],
+                    ),
+                    SizedBox(height: h * 0.02),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Clozapex 25 mg',
+                          style: GoogleFonts.lora(
+                              color: kBlack,
+                              fontSize: w * .045,
+                              fontWeight: FontWeight.w500),
+                        ),
+                        Text(
+                          ' قرص قبل النوم',
+                          style: GoogleFonts.lora(
+                              color: kBlack,
+                              fontSize: w * .045,
+                              fontWeight: FontWeight.w500),
+                        )
+                      ],
                     ),
                   ],
                 ),
               ),
-            ),
-            SizedBox(height: h * 0.04),
-            Center(
-              child: Text(
-                "A follow-up test notification will be sent in 2 weeks.".tr,
-                textAlign: TextAlign.center,
-                style: GoogleFonts.lora(
-                    color: kRed,
-                    fontSize: w * .045,
-                    fontWeight: FontWeight.bold),
-              ),
-            ),
+            )
           ],
         ),
       ),

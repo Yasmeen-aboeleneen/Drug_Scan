@@ -10,7 +10,7 @@ class MyLocalization implements Translations {
           "Your Result is": "النتيجة: ",
           "Detected Drug:": " : نوع المخدر",
           "You must take the remedial course in order to be accepted into the college.":
-              "يجب عليك أن تأخذ الدورة العلاجية حتى يتم قبولك في الكلية.",
+              "يجب عليك أن تأخذ دورة علاج من المخدرات لمدة 14 يومًا ثم تعيد إجراء فحص المخدرات مرة أخرى",
           "Exit": "خروج",
           "Prescription": "العلاج",
           " Please go to the Student Affairs Department to complete the remaining procedures.":
@@ -31,14 +31,14 @@ class MyLocalization implements Translations {
           "Choose Language": "Choose Language",
           "FromGallery": "From gallery",
           "Captureimage": "Capture image",
-          "Your Result is": "Your Result is : ",
+          "Your Result is": " Screen Result : ",
           "Detected Drug:": "Detected Drug : ",
           "You must take the remedial course in order to be accepted into the college.":
-              "You must take the remedial course in order to be accepted into the college.",
+              "You Must Take a 14-Day Drug Treatment Course and Retake The Drug Screen Again",
           "Exit": "Exit",
           "Prescription": "Prescription",
           " Please go to the Student Affairs Department to complete the remaining procedures.":
-              " Please go to the Student Affairs Department to complete the remaining procedures.",
+              " Please Go to the Student Affairs Department to Complete the Remaining Procedures.",
           "Positive": "Positive",
           "Start Scanning": "Start Scanning",
           "Processing...": "Processing...",
@@ -49,7 +49,7 @@ class MyLocalization implements Translations {
               "A follow-up test notification will be sent in 2 weeks.",
           "Treatment Plan": "Treatment Plan",
           'Upload your medical\n examination result':
-              'Upload your medical\n examination result'
+              'Upload Urine Drug\n Screen Image'
         }
       };
 }

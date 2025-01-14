@@ -13,21 +13,22 @@ class ResultScreenIsNegative extends StatelessWidget {
   });
   final String result;
 
-   Future<void> _saveAnalysisResult() async {
+  Future<void> _saveAnalysisResult() async {
     final user = FirebaseAuth.instance.currentUser;
     if (user != null) {
-       final userDoc = await FirebaseFirestore.instance
+      final userDoc = await FirebaseFirestore.instance
           .collection('users')
           .doc(user.uid)
           .get();
-      final userName = userDoc.data()?['username'] ?? user.displayName ?? 'Unknown User';
+      final userName =
+          userDoc.data()?['username'] ?? user.displayName ?? 'Unknown User';
 
       await FirebaseFirestore.instance.collection('analysis_results').add({
         'userId': user.uid,
-        'userName': userName, 
+        'userName': userName,
         'userEmail': user.email,
         'result': result,
-        'timestamp': FieldValue.serverTimestamp(), 
+        'timestamp': FieldValue.serverTimestamp(),
       });
     }
   }
@@ -37,7 +38,7 @@ class ResultScreenIsNegative extends StatelessWidget {
     var h = MediaQuery.of(context).size.height;
     var w = MediaQuery.of(context).size.width;
 
-     _saveAnalysisResult();
+    _saveAnalysisResult();
 
     return Scaffold(
       backgroundColor: kveryWhite,
@@ -45,38 +46,46 @@ class ResultScreenIsNegative extends StatelessWidget {
         child: Column(
           children: [
             SizedBox(
-              height: h * .15,
+              height: h * .12,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Text(
-                  "Your Result is".tr,
-                  style: GoogleFonts.lora(
-                      color: kPrimary,
-                      fontSize: w * .07,
-                      fontWeight: FontWeight.bold),
-                ),
-                Text(
-                  result,
-                  style: GoogleFonts.lora(
-                      color: kPrimary,
-                      fontSize: w * .08,
-                      fontWeight: FontWeight.bold),
-                ),
-              ],
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    "Your Result is".tr,
+                    style: GoogleFonts.lora(
+                        color: kPrimary,
+                        fontSize: w * .07,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    result,
+                    style: GoogleFonts.lora(
+                        color: kPrimary,
+                        fontSize: w * .08,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
             ),
             SizedBox(
-              height: h * .06,
+              height: h * .055,
             ),
-            Icon(
-              Icons.check_circle_outline,
-              color: kPrimary,
-              size: w * .7,
+            SizedBox(
+              height: h * .4,
+              child: Center(
+                child: Icon(
+                  Icons.check_circle_outline,
+                  color: kPrimary,
+                  size: w * .75,
+                ),
+              ),
             ),
             SizedBox(
               width: w,
-              height: h * .4,
+              height: h * .3,
               child: Center(
                 child: Text(
                   textAlign: TextAlign.center,
@@ -90,7 +99,7 @@ class ResultScreenIsNegative extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: h * .01,
+              height: h * .12,
             ),
           ],
         ),

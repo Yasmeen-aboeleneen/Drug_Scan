@@ -19,8 +19,9 @@ class ImageContainer extends StatelessWidget {
       child: Center(
         child: Text(
           'Upload your medical\n examination result'.tr,
+          textAlign: TextAlign.center,
           style: GoogleFonts.aBeeZee(
-              fontWeight: FontWeight.w700, fontSize: w * .08, color: kPrimary),
+              fontWeight: FontWeight.w700, fontSize: w * .078, color: kPrimary),
         ),
       ),
     );

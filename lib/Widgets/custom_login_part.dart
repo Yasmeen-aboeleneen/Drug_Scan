@@ -53,7 +53,7 @@ class _CustomLoginContainerState extends State<CustomLoginContainer> {
             controller: emailController,
             filledcolor: kveryWhite,
             icon: Icons.mail_outline_outlined,
-            hintText: 'Enter your email',
+            hintText: 'Enter User Name',
             iconColor: kPrimary,
             keyboardType: TextInputType.emailAddress,
             hintcolor: kBlack,

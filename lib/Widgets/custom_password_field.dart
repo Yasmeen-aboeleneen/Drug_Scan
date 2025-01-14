@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 
 class CustomPasswordtextfield extends StatefulWidget {
   const CustomPasswordtextfield({
-    super.key, this.controller,
+    super.key,
+    this.controller,
   });
 
   // final String? Function(String?) valid;
-   final TextEditingController? controller;
+  final TextEditingController? controller;
 
   @override
   State<CustomPasswordtextfield> createState() =>
@@ -17,9 +18,6 @@ class CustomPasswordtextfield extends StatefulWidget {
 class _CustomPasswordtextfieldState extends State<CustomPasswordtextfield> {
   final textFieldFocusNode = FocusNode();
   bool _obscured = false;
-   
-
-  
 
   void _toggleObscured() {
     setState(() {
@@ -42,7 +40,7 @@ class _CustomPasswordtextfieldState extends State<CustomPasswordtextfield> {
         decoration: InputDecoration(
           fillColor: kveryWhite,
           filled: true,
-          hintText: "Enter your password",
+          hintText: "Enter Password",
           hintStyle: TextStyle(
             fontSize: w * .032,
             fontWeight: FontWeight.bold,
