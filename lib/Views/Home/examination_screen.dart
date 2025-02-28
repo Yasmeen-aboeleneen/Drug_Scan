@@ -20,7 +20,6 @@ class _ExaminationScreenState extends State<ExaminationScreen> {
   String _scanResult = "Processing...".tr;
   bool _isScanning = false;
 
-  // قائمة بأسماء المخدرات المطلوبة
   final List<String> drugNames = [
     "cannabinoids",
     "opiate",
@@ -43,29 +42,24 @@ class _ExaminationScreenState extends State<ExaminationScreen> {
         _isScanning = false;
       });
 
-      // التحقق مما إذا كان النص يحتوي على أي من أسماء المخدرات
       final containsDrug = drugNames.any(
           (drug) => _scanResult.toLowerCase().contains(drug.toLowerCase()));
 
       if (containsDrug) {
-        // تحديد نوع المخدر الذي تم اكتشافه
         String detectedDrug = drugNames.firstWhere(
           (drug) => _scanResult.toLowerCase().contains(drug.toLowerCase()),
           orElse: () => "Unknown",
         );
 
-        // الانتقال إلى شاشة النتيجة الإيجابية مع نوع المخدر
         Get.to(() => ResultScreenIsPositive(
               result: "Positive".tr,
               detectedDrug: detectedDrug,
             ));
       } else if (_scanResult.toLowerCase().contains("negative")) {
-        // إذا تم العثور على كلمة "negative" في النص
         Get.to(() => ResultScreenIsNegative(
               result: "Negative".tr,
             ));
       } else {
-        // إذا لم يتم العثور على أي من أسماء المخدرات أو كلمة "negative"
         _showErrorDialog(
             "Invalid Image", "The image does not contain any drug type.");
       }
@@ -105,16 +99,16 @@ class _ExaminationScreenState extends State<ExaminationScreen> {
       backgroundColor: kPrimary,
       body: Column(
         children: [
-          SizedBox(height: h * .1),
+          SizedBox(height: h * .05),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: w * .05),
             child: Container(
-              height: h * .45,
+              height: h * .62,
               width: w,
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: FileImage(widget.imageFile),
-                  fit: BoxFit.cover,
+                  fit: BoxFit.fill,
                 ),
                 border: Border.all(width: w * .02, color: kveryWhite),
                 color: kveryWhite,
@@ -122,7 +116,7 @@ class _ExaminationScreenState extends State<ExaminationScreen> {
               ),
             ),
           ),
-          SizedBox(height: h * .09),
+          SizedBox(height: h * .05),
           _isScanning
               ? const CircularProgressIndicator(color: kveryWhite)
               : Expanded(
@@ -152,7 +146,7 @@ class _ExaminationScreenState extends State<ExaminationScreen> {
             ),
           ),
           SizedBox(
-            height: h * .15,
+            height: h * .1,
           )
         ],
       ),

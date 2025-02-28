@@ -22,7 +22,7 @@ class MyLoController extends GetxController {
     if (savedLang != null) {
       initialLang = Locale(savedLang); // تعيين اللغة المحفوظة
     } else {
-      initialLang = Locale('en'); // اللغة الافتراضية
+      initialLang = const Locale('en'); // اللغة الافتراضية
     }
   }
 

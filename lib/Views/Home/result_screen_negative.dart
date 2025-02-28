@@ -55,14 +55,14 @@ class ResultScreenIsNegative extends StatelessWidget {
                 children: [
                   Text(
                     "Your Result is".tr,
-                    style: GoogleFonts.lora(
+                    style: GoogleFonts.aBeeZee(
                         color: kPrimary,
                         fontSize: w * .07,
                         fontWeight: FontWeight.bold),
                   ),
                   Text(
                     result,
-                    style: GoogleFonts.lora(
+                    style: GoogleFonts.aBeeZee(
                         color: kPrimary,
                         fontSize: w * .08,
                         fontWeight: FontWeight.bold),
@@ -89,9 +89,9 @@ class ResultScreenIsNegative extends StatelessWidget {
               child: Center(
                 child: Text(
                   textAlign: TextAlign.center,
-                  " Please go to the Student Affairs Department to complete the remaining procedures."
+                  " Please go to the Student Affairs Department to complete the remaining procedures"
                       .tr,
-                  style: GoogleFonts.lora(
+                  style: GoogleFonts.aBeeZee(
                       color: kRed,
                       fontSize: w * .06,
                       fontWeight: FontWeight.bold),

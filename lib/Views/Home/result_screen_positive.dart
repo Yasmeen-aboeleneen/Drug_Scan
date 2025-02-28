@@ -146,17 +146,15 @@ class ResultScreenIsPositive extends StatelessWidget {
       backgroundColor: kveryWhite,
       body: SingleChildScrollView(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             SizedBox(height: h * .15),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                SizedBox(
-                  width: w * .03,
-                ),
                 Text(
                   "Your Result is".tr,
-                  style: GoogleFonts.lora(
+                  style: GoogleFonts.aBeeZee(
                     color: kPrimary,
                     fontSize: w * .07,
                     fontWeight: FontWeight.bold,
@@ -164,7 +162,7 @@ class ResultScreenIsPositive extends StatelessWidget {
                 ),
                 Text(
                   result,
-                  style: GoogleFonts.lora(
+                  style: GoogleFonts.aBeeZee(
                     color: kRed,
                     fontSize: w * .08,
                     fontWeight: FontWeight.bold,
@@ -173,13 +171,20 @@ class ResultScreenIsPositive extends StatelessWidget {
               ],
             ),
             SizedBox(height: h * .02),
-            Text(
-              "Detected Drug: $detectedDrug".tr,
-              style: GoogleFonts.lora(
-                color: kPrimary,
-                fontSize: w * .06,
-                fontWeight: FontWeight.bold,
-              ),
+            OverflowBar(
+              children: [
+                SizedBox(
+                  width: w * .03,
+                ),
+                Text(
+                  " Detected Drug: $detectedDrug".tr,
+                  style: GoogleFonts.aBeeZee(
+                    color: kPrimary,
+                    fontSize: w * .07,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
             ),
             SizedBox(height: h * .05),
             SizedBox(
@@ -188,9 +193,9 @@ class ResultScreenIsPositive extends StatelessWidget {
               child: Center(
                 child: Text(
                   textAlign: TextAlign.center,
-                  "You must take the remedial course in order to be accepted into the college."
+                  "You must take the remedial course in order to be accepted into the college"
                       .tr,
-                  style: GoogleFonts.lora(
+                  style: GoogleFonts.aBeeZee(
                     color: kRed,
                     fontSize: w * .065,
                     fontWeight: FontWeight.bold,

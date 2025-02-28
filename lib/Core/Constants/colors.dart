@@ -9,6 +9,7 @@ const Color kRed = Color.fromARGB(255, 154, 40, 32);
 const kveryWhite = Color.fromARGB(255, 255, 255, 255);
 const Color kLightPurple = Color.fromARGB(255, 231, 212, 234);
 
-const Color kGrey = Color.fromARGB(255, 205, 202, 205);
+const Color kGrey = Color.fromARGB(255, 225, 224, 225);
 const Color kDGrey = Color.fromARGB(255, 94, 93, 94);
 const Color kwarm = Color.fromARGB(255, 238, 243, 218);
+const Color kBlue = Color.fromARGB(255, 12, 78, 132);

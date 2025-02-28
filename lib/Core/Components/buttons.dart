@@ -22,7 +22,7 @@ class Buttons extends StatelessWidget {
           BoxDecoration(borderRadius: BorderRadius.circular(25), color: color),
       child: Center(
         child: Text(text,
-            style: GoogleFonts.lora(
+            style: GoogleFonts.aBeeZee(
                 color: kveryWhite,
                 fontSize: w * .06,
                 fontWeight: FontWeight.bold)),

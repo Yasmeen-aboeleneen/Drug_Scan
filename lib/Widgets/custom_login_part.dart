@@ -94,7 +94,7 @@ class _CustomLoginContainerState extends State<CustomLoginContainer> {
                 text: 'Login',
               )),
           SizedBox(
-            height: h * .03,
+            height: h * .045,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -108,10 +108,10 @@ class _CustomLoginContainerState extends State<CustomLoginContainer> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: Text(
-                  "Or login with",
+                  "OR",
                   style: GoogleFonts.notoSans(
                     color: kveryWhite,
-                    fontSize: w * .04,
+                    fontSize: w * .049,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -130,6 +130,14 @@ class _CustomLoginContainerState extends State<CustomLoginContainer> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
+              Text(
+                "Login With",
+                style: GoogleFonts.notoSans(
+                  color: kveryWhite,
+                  fontSize: w * .04,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
               SocialmediaRow(
                 image: "Assets/google.jpg",
                 text: "Google",
@@ -172,7 +180,6 @@ class _CustomLoginContainerState extends State<CustomLoginContainer> {
         password: passwordController.text.trim(),
       );
 
-      // الانتقال إلى الشاشة الرئيسية عند نجاح تسجيل الدخول
       if (!mounted) return;
       Navigator.push(
         context,
@@ -236,14 +243,12 @@ class _CustomLoginContainerState extends State<CustomLoginContainer> {
         idToken: googleAuth.idToken,
       );
 
-      // التحقق من وجود البريد الإلكتروني مسبقًا
       final email = googleUser.email;
       final signInMethods =
           // ignore: deprecated_member_use
           await FirebaseAuth.instance.fetchSignInMethodsForEmail(email);
 
       if (signInMethods.isEmpty) {
-        // البريد الإلكتروني غير مسجل مسبقًا
         showDialog(
           context: context,
           builder: (context) {
@@ -254,13 +259,11 @@ class _CustomLoginContainerState extends State<CustomLoginContainer> {
             );
           },
         );
-        return; // إيقاف العملية هنا
+        return;
       }
 
-      // تسجيل الدخول باستخدام بيانات الاعتماد
       await FirebaseAuth.instance.signInWithCredential(credential);
 
-      // الانتقال إلى صفحة Auth بعد تسجيل الدخول بنجاح
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => const Auth()),

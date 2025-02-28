@@ -1,6 +1,9 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:drug_scan_app/Core/Constants/colors.dart';
 import 'package:drug_scan_app/Views/Home/home_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -51,20 +54,90 @@ class _SplashScreenState extends State<SplashScreen>
 
   @override
   Widget build(BuildContext context) {
+    var h = MediaQuery.of(context).size.height;
+    var w = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: kveryWhite,
-      body: Center(
-        child: AnimatedBuilder(
-          animation: _animation,
-          builder: (context, child) {
-            return Transform.scale(
-              scale: _animation.value,
-              child: child,
-            );
-          },
-          child: Image.asset('Assets/pic.png'),
+      body: Stack(children: [
+        Positioned(
+            top: 10,
+            left: 10,
+            child: Image.asset(
+              'Assets/ImageHandler.png',
+              width: w * .3,
+              height: h * .2,
+            )),
+        Positioned(
+            top: 10,
+            right: 10,
+            child: Image.asset(
+              'Assets/logo-sefac.jpg',
+              width: w * .3,
+              height: h * .2,
+            )),
+        Positioned(
+          bottom: h * .36,
+          left: w * .08,
+          right: w * .08,
+          child: AnimatedBuilder(
+            animation: _animation,
+            builder: (context, child) {
+              return Transform.scale(
+                scale: _animation.value,
+                child: child,
+              );
+            },
+            child: Image.asset(
+              'Assets/pic.png',
+              width: w * .75,
+              fit: BoxFit.cover,
+            ),
+          ),
         ),
-      ),
+        Positioned(
+            bottom: h * .13,
+            left: w * .05,
+            right: w * .05,
+            child: Column(
+              children: [
+                Text(
+                  'Prepared by :',
+                  style: GoogleFonts.hammersmithOne(
+                      color: kBlack,
+                      fontSize: w * .045,
+                      fontWeight: FontWeight.bold),
+                ),
+                SizedBox(
+                  height: h * .02,
+                ),
+                Text(
+                  textAlign: TextAlign.center,
+                  'Dr. Wessam Mohammad Kamal ElSaid',
+                  style: GoogleFonts.hammersmithOne(
+                      color: kBlack,
+                      fontSize: w * .045,
+                      fontWeight: FontWeight.bold),
+                ),
+                Text(
+                  'Assistant Professor of Computer Science',
+                  style: GoogleFonts.hammersmithOne(
+                      color: kBlack,
+                      fontSize: w * .045,
+                      fontWeight: FontWeight.bold),
+                ),
+                Text(
+                  'Mansoura University ',
+                  style: GoogleFonts.hammersmithOne(
+                      color: kBlack,
+                      fontSize: w * .045,
+                      fontWeight: FontWeight.bold),
+                ),
+                SizedBox(
+                  height: h * .02,
+                ),
+              ],
+            ))
+      ]),
     );
   }
 }

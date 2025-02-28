@@ -31,7 +31,7 @@ class CustomCaptureButton extends StatelessWidget {
         height: h * .07,
         width: w * .45,
         decoration: BoxDecoration(
-          color: kPrimary,
+          color: kveryWhite,
           borderRadius: BorderRadius.circular(25),
         ),
         child: Row(
@@ -40,14 +40,14 @@ class CustomCaptureButton extends StatelessWidget {
             Text(
               text,
               style: GoogleFonts.aBeeZee(
-                color: kveryWhite,
+                color: kPrimary,
                 fontWeight: FontWeight.bold,
                 fontSize: w * .049,
               ),
             ),
             Icon(
               icon,
-              color: kveryWhite,
+              color: kPrimary,
               size: h * .04,
             ),
           ],

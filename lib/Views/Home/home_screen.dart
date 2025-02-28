@@ -1,13 +1,8 @@
-import 'dart:io';
-
 import 'package:drug_scan_app/Core/Constants/colors.dart';
-import 'package:drug_scan_app/Views/Home/examination_screen.dart';
-import 'package:drug_scan_app/Views/Lang/language_screen.dart';
-import 'package:drug_scan_app/Widgets/custom_capture_button.dart';
-import 'package:drug_scan_app/Widgets/image_container.dart';
+
+import 'package:drug_scan_app/Widgets/custom_app_bar.dart';
+import 'package:drug_scan_app/Widgets/custom_bottom_container.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -17,82 +12,16 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  File? _imageFile;
-  final ImagePicker _picker = ImagePicker();
-  Future<void> _pickImage(ImageSource source) async {
-    final pickedFile = await _picker.pickImage(source: source);
-    if (pickedFile != null) {
-      setState(() {
-        _imageFile = File(pickedFile.path);
-      });
-      Navigator.push(
-        // ignore: use_build_context_synchronously
-        context,
-        MaterialPageRoute(
-          builder: (context) => ExaminationScreen(imageFile: _imageFile!),
-        ),
-      );
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
-    var h = MediaQuery.of(context).size.height;
-    var w = MediaQuery.of(context).size.width;
-    return SafeArea(
+    return const SafeArea(
       child: Scaffold(
         backgroundColor: kveryWhite,
-        body: Column(
+        body: Stack(
           children: [
-            SizedBox(
-              height: h * .03,
-            ),
-            Align(
-              alignment: Alignment.topLeft,
-              child: IconButton(
-                  style: const ButtonStyle(
-                      backgroundColor: WidgetStatePropertyAll(kPrimary)),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const LanguageScreen()));
-                  },
-                  icon: const Icon(
-                    Icons.language_outlined,
-                    color: kveryWhite,
-                  )),
-            ),
-            SizedBox(
-              height: h * .01,
-            ),
-            Image.asset(
-              'Assets/logo.png',
-              width: w * .8,
-              height: h * .2,
-            ),
-            const ImageContainer(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(left: w * .01),
-                  child: GestureDetector(
-                    onTap: () => _pickImage(ImageSource.camera),
-                    child: CustomCaptureButton(
-                        text: 'Captureimage'.tr, icon: Icons.camera_alt),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(right: w * .01),
-                  child: GestureDetector(
-                    onTap: () => _pickImage(ImageSource.gallery),
-                    child: CustomCaptureButton(
-                        text: 'FromGallery'.tr, icon: Icons.photo),
-                  ),
-                )
-              ],
-            )
+            Positioned(top: 0, left: 0, right: 0, child: CustomAppBar()),
+            Positioned(
+                bottom: 0, left: 0, right: 0, child: CustomBottomContainer())
           ],
         ),
       ),
