@@ -64,8 +64,32 @@ class ResultScreenIsNegative extends StatelessWidget {
                     result,
                     style: GoogleFonts.aBeeZee(
                         color: kPrimary,
-                        fontSize: w * .08,
+                        fontSize: w * .07,
                         fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    " Detected Drug : ".tr,
+                    style: GoogleFonts.aBeeZee(
+                      color: kPrimary,
+                      fontSize: w * .07,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    result,
+                    style: GoogleFonts.aBeeZee(
+                      color: kPrimary,
+                      fontSize: w * .07,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ],
               ),

@@ -23,7 +23,7 @@ class Prescription extends StatelessWidget {
         backgroundColor: kPrimary,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -31,10 +31,9 @@ class Prescription extends StatelessWidget {
               "Follow the below steps for recovery:".tr,
               style: GoogleFonts.aBeeZee(
                   color: kPrimary,
-                  fontSize: w * .05,
+                  fontSize: w * .044,
                   fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: h * 0.02),
             Container(
               width: w,
               height: h * .2,
@@ -51,10 +50,10 @@ class Prescription extends StatelessWidget {
                           "1. Take the prescribed medication daily\n\n"
                           "2. Avoid any substances causing issues\n\n"
                           "3. Follow up with your counselor weekly\n\n"
-                          "4. Maintain a healthy lifestyle and stay hydrated",
+                          "4. Maintain a healthy lifestyle",
                           style: GoogleFonts.aBeeZee(
                               color: kBlue,
-                              fontSize: w * .045,
+                              fontSize: w * .04,
                               fontWeight: FontWeight.w900),
                         ),
                       ),
@@ -63,17 +62,17 @@ class Prescription extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: h * 0.04),
+            SizedBox(height: h * 0.015),
             Text(
               "Prescription",
               style: GoogleFonts.aBeeZee(
-                  color: kRed, fontWeight: FontWeight.bold, fontSize: w * .06),
+                  color: kRed, fontWeight: FontWeight.bold, fontSize: w * .05),
             ),
-            SizedBox(height: h * 0.02),
+            SizedBox(height: h * 0.015),
             Container(
-              padding: const EdgeInsets.all(5),
+              padding: const EdgeInsets.all(16),
               width: w,
-              height: h * .47,
+              height: h * .52,
               decoration: const BoxDecoration(
                   color: kGrey,
                   borderRadius: BorderRadius.all(Radius.circular(8))),
@@ -86,85 +85,85 @@ class Prescription extends StatelessWidget {
                           'Controloc 40 mg',
                           style: GoogleFonts.aBeeZee(
                               color: kBlue,
-                              fontSize: w * .045,
+                              fontSize: w * .042,
                               fontWeight: FontWeight.w800),
                         ),
                         Text(
                           'قرص قبل الفطار',
                           style: GoogleFonts.aBeeZee(
                               color: kBlue,
-                              fontSize: w * .045,
+                              fontSize: w * .042,
                               fontWeight: FontWeight.w800),
                         )
                       ],
                     ),
-                    SizedBox(height: h * 0.02),
+                    SizedBox(height: h * 0.015),
                     Column(
                       children: [
                         Text(
                           'Divakote  500 mg',
                           style: GoogleFonts.aBeeZee(
                               color: kBlue,
-                              fontSize: w * .045,
+                              fontSize: w * .042,
                               fontWeight: FontWeight.w800),
                         ),
                         Text(
                           textAlign: TextAlign.center,
-                          'قرص مرتين في اليوم\n (صباحا ومساء)',
+                          'قرص مرتين في اليوم (صباحا ومساء)',
                           style: GoogleFonts.aBeeZee(
                               color: kBlue,
-                              fontSize: w * .045,
+                              fontSize: w * .042,
                               fontWeight: FontWeight.w800),
                         )
                       ],
                     ),
-                    SizedBox(height: h * 0.02),
+                    SizedBox(height: h * 0.015),
                     Column(
                       children: [
                         Text(
                           'Arythrex  200 mg',
                           style: GoogleFonts.aBeeZee(
                               color: kBlue,
-                              fontSize: w * .045,
+                              fontSize: w * .042,
                               fontWeight: FontWeight.w800),
                         ),
                         Text(
                           'قرص بعد الغذاء',
                           style: GoogleFonts.aBeeZee(
                               color: kBlue,
-                              fontSize: w * .045,
+                              fontSize: w * .042,
                               fontWeight: FontWeight.w800),
                         )
                       ],
                     ),
-                    SizedBox(height: h * 0.02),
+                    SizedBox(height: h * 0.015),
                     Column(
                       children: [
                         Text(
                           'Gralipentin XR 300 mg',
                           style: GoogleFonts.aBeeZee(
                               color: kBlue,
-                              fontSize: w * .045,
+                              fontSize: w * .042,
                               fontWeight: FontWeight.w800),
                         ),
                         Text(
                           textAlign: TextAlign.center,
-                          'قرص مرتين في اليوم \n(صباحا ومساء)',
+                          'قرص مرتين في اليوم (صباحا ومساء)',
                           style: GoogleFonts.aBeeZee(
                               color: kBlue,
-                              fontSize: w * .045,
+                              fontSize: w * .042,
                               fontWeight: FontWeight.w800),
                         )
                       ],
                     ),
-                    SizedBox(height: h * 0.02),
+                    SizedBox(height: h * 0.015),
                     Column(
                       children: [
                         Text(
                           'Dogmatil 50 mg',
                           style: GoogleFonts.aBeeZee(
                               color: kBlue,
-                              fontSize: w * .045,
+                              fontSize: w * .042,
                               fontWeight: FontWeight.w800),
                         ),
                         Text(
@@ -172,26 +171,26 @@ class Prescription extends StatelessWidget {
                           'قرص مرتين في اليوم \n(صباحا ومساء)',
                           style: GoogleFonts.aBeeZee(
                               color: kBlue,
-                              fontSize: w * .045,
+                              fontSize: w * .042,
                               fontWeight: FontWeight.w800),
                         )
                       ],
                     ),
-                    SizedBox(height: h * 0.02),
+                    SizedBox(height: h * 0.015),
                     Column(
                       children: [
                         Text(
                           'Clozapex 25 mg',
                           style: GoogleFonts.aBeeZee(
                               color: kBlue,
-                              fontSize: w * .045,
+                              fontSize: w * .042,
                               fontWeight: FontWeight.w800),
                         ),
                         Text(
                           ' قرص قبل النوم',
                           style: GoogleFonts.aBeeZee(
                               color: kBlue,
-                              fontSize: w * .045,
+                              fontSize: w * .042,
                               fontWeight: FontWeight.w800),
                         )
                       ],

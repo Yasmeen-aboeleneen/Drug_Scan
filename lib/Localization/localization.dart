@@ -9,7 +9,7 @@ class MyLocalization implements Translations {
           "Captureimage": "التقط صورة",
           "Your Result is": "النتيجة: ",
           "Detected Drug:": " : نوع المخدر",
-          "You must take the remedial course in order to be accepted into the college.":
+          "You Must Take a 14-Day Drug Treatment Course and Retake The Drug Screen Again":
               "يجب عليك أن تأخذ دورة علاج من المخدرات لمدة 14 يومًا ثم تعيد إجراء فحص المخدرات مرة أخرى",
           "Exit": "خروج",
           "Prescription": "العلاج",
@@ -32,7 +32,7 @@ class MyLocalization implements Translations {
           "Captureimage": "Capture image",
           "Your Result is": " Test Result : ",
           "Detected Drug:": "Detected Drug : ",
-          "You must take the remedial course in order to be accepted into the college.":
+          "You Must Take a 14-Day Drug Treatment Course and Retake The Drug Screen Again":
               "You Must Take a 14-Day Drug Treatment Course and Retake The Drug Screen Again",
           "Exit": "Exit",
           "Prescription": "Prescription",

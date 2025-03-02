@@ -37,11 +37,13 @@ class _SplashScreenState extends State<SplashScreen>
 
     _controller.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(
-            builder: (context) => const HomeScreen(),
-          ),
-        );
+        Future.delayed(Duration(seconds: 4), () {
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+              builder: (context) => const HomeScreen(),
+            ),
+          );
+        });
       }
     });
   }
@@ -114,21 +116,21 @@ class _SplashScreenState extends State<SplashScreen>
                   textAlign: TextAlign.center,
                   'Dr. Wessam Mohammad Kamal ElSaid',
                   style: GoogleFonts.hammersmithOne(
-                      color: kBlack,
+                      color: kBlue,
                       fontSize: w * .045,
                       fontWeight: FontWeight.bold),
                 ),
                 Text(
                   'Assistant Professor of Computer Science',
                   style: GoogleFonts.hammersmithOne(
-                      color: kBlack,
+                      color: kBlue,
                       fontSize: w * .045,
                       fontWeight: FontWeight.bold),
                 ),
                 Text(
                   'Mansoura University ',
                   style: GoogleFonts.hammersmithOne(
-                      color: kBlack,
+                      color: kBlue,
                       fontSize: w * .045,
                       fontWeight: FontWeight.bold),
                 ),

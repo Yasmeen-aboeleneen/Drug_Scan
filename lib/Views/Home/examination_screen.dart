@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:drug_scan_app/Views/Home/result_screen_positive.dart';
-import 'package:drug_scan_app/Views/Home/result_screen_negative.dart'; // شاشة الحالة السلبية
+import 'package:drug_scan_app/Views/Home/result_screen_negative.dart'; 
 import 'package:drug_scan_app/Widgets/scan_button.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';

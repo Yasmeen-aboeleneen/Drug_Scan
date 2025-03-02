@@ -20,6 +20,12 @@ class ResultScreenIsPositive extends StatelessWidget {
   final String result;
   final String detectedDrug;
 
+  // دالة لتحويل أول حرف إلى حرف كبير
+  String capitalizeFirstLetter(String text) {
+    if (text.isEmpty) return text;
+    return text[0].toUpperCase() + text.substring(1);
+  }
+
   Future<void> _saveAnalysisResult() async {
     try {
       final user = FirebaseAuth.instance.currentUser;
@@ -142,6 +148,9 @@ class ResultScreenIsPositive extends StatelessWidget {
 
     _saveAnalysisResult();
 
+    // تحويل أول حرف من detectedDrug إلى حرف كبير
+    final capitalizedDrug = capitalizeFirstLetter(detectedDrug);
+
     return Scaffold(
       backgroundColor: kveryWhite,
       body: SingleChildScrollView(
@@ -156,7 +165,7 @@ class ResultScreenIsPositive extends StatelessWidget {
                   "Your Result is".tr,
                   style: GoogleFonts.aBeeZee(
                     color: kPrimary,
-                    fontSize: w * .07,
+                    fontSize: w * .067,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -164,23 +173,29 @@ class ResultScreenIsPositive extends StatelessWidget {
                   result,
                   style: GoogleFonts.aBeeZee(
                     color: kRed,
-                    fontSize: w * .08,
+                    fontSize: w * .067,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               ],
             ),
             SizedBox(height: h * .02),
-            OverflowBar(
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                SizedBox(
-                  width: w * .03,
-                ),
                 Text(
-                  " Detected Drug: $detectedDrug".tr,
+                  " Detected Drug : ".tr,
                   style: GoogleFonts.aBeeZee(
                     color: kPrimary,
-                    fontSize: w * .07,
+                    fontSize: w * .06,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  capitalizedDrug,
+                  style: GoogleFonts.aBeeZee(
+                    color: kRed,
+                    fontSize: w * .06,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -193,7 +208,7 @@ class ResultScreenIsPositive extends StatelessWidget {
               child: Center(
                 child: Text(
                   textAlign: TextAlign.center,
-                  "You must take the remedial course in order to be accepted into the college"
+                  "You Must Take a 14-Day Drug Treatment Course and Retake The Drug Screen Again"
                       .tr,
                   style: GoogleFonts.aBeeZee(
                     color: kRed,
